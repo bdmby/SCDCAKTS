@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>The CSV Virtual Table</title>
+<style type="text/css">
+body {
+    margin: auto;
+    font-family: Verdana, sans-serif;
+    padding: 8px 1%;
+}
+
+a { color: #044a64 }
+a:visited { color: #734559 }
+
+.logo { position:absolute; margin:3px; }
+.tagline {
+  float:right;
+  text-align:right;
+  font-style:italic;
+  width:300px;
+  margin:12px;
+  margin-top:58px;
+}
+
+.menubar {
+  clear: both;
+  border-radius: 8px;
+  background: #044a64;
+  padding: 0px;
+  margin: 0px;
+  cell-spacing: 0px;
+}    
+.toolbar {
+  text-align: center;
+  line-height: 1.6em;
+  margin: 0;
+  padding: 0px 8px;
+}
+.toolbar a { color: white; text-decoration: none; padding: 6px 12px; }
+.toolbar a:visited { color: white; }
+.toolbar a:hover { color: #044a64; background: white; }
+
+.content    { margin: 5%; }
+.content dt { font-weight:bold; }
+.content dd { margin-bottom: 25px; margin-left:20%; }
+.content ul { padding:0px; padding-left: 15px; margin:0px; }
+
+/* Things for "fancyformat" documents start here. */
+.fancy img+p {font-style:italic}
+.fancy .codeblock i { color: darkblue; }
+.fancy h1,.fancy h2,.fancy h3,.fancy h4 {font-weight:normal;color:#044a64}
+.fancy h2 { margin-left: 10px }
+.fancy h3 { margin-left: 20px }
+.fancy h4 { margin-left: 30px }
+.fancy th {white-space:xnowrap;text-align:left;border-bottom:solid 1px #444}
+.fancy th, .fancy td {padding: 0.2em 1ex; vertical-align:top}
+.fancy #toc a        { color: darkblue ; text-decoration: none }
+.fancy .todo         { color: #AA3333 ; font-style : italic }
+.fancy .todo:before  { content: 'TODO:' }
+.fancy p.todo        { border: solid #AA3333 1px; padding: 1ex }
+.fancy img { display:block; }
+.fancy :link:hover, .fancy :visited:hover { background: wheat }
+.fancy p,.fancy ul,.fancy ol,.fancy dl { margin: 1em 5ex }
+.fancy li p { margin: 1em 0 }
+.fancy blockquote { margin-left : 10ex }
+/* End of "fancyformat" specific rules. */
+
+.yyterm {
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 11px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+</style>
+  
+</head>
+<body>
+<div><!-- container div to satisfy validator -->
+
+<a href="index.html">
+<img class="logo" src="images/sqlite370_banner.gif" alt="SQLite Logo"
+ border="0"></a>
+<div><!-- IE hack to prevent disappearing logo--></div>
+<div class="tagline">Small. Fast. Reliable.<br>Choose any three.</div>
+
+<table width=100% class="menubar"><tr>
+  <td width=100%>
+  <div class="toolbar">
+    <a href="about.html">About</a>
+    <a href="docs.html">Documentation</a>
+    <a href="download.html">Download</a>
+    <a href="copyright.html">License</a>
+    <a href="support.html">Support</a>
+    <a href="http://www.hwaci.com/sw/sqlite/prosupport.html">Purchase</a>
+  </div>
+<script>
+  gMsg = "Search SQLite Docs..."
+  function entersearch() {
+    var q = document.getElementById("q");
+    if( q.value == gMsg ) { q.value = "" }
+    q.style.color = "black"
+    q.style.fontStyle = "normal"
+  }
+  function leavesearch() {
+    var q = document.getElementById("q");
+    if( q.value == "" ) { 
+      q.value = gMsg
+      q.style.color = "#044a64"
+      q.style.fontStyle = "italic"
+    }
+  }
+  function hideorshow(btn,obj){
+    var x = document.getElementById(obj);
+    var b = document.getElementById(btn);
+    if( x.style.display!='none' ){
+      x.style.display = 'none';
+      b.innerHTML='show';
+    }else{
+      x.style.display = '';
+      b.innerHTML='hide';
+    }
+    return false;
+  }
+</script>
+<td>
+    <div style="padding:0 1em 0px 0;white-space:nowrap">
+    <form name=f method="GET" action="https://www.sqlite.org/search">
+      <input id=q name=q type=text
+       onfocus="entersearch()" onblur="leavesearch()" style="width:24ex;padding:1px 1ex; border:solid white 1px; font-size:0.9em ; font-style:italic;color:#044a64;" value="Search SQLite Docs...">
+      <input type=submit value="Go" style="border:solid white 1px;background-color:#044a64;color:white;font-size:0.9em;padding:0 1ex">
+    </form>
+    </div>
+  </table>
+
+<div class=startsearch></div>
+  
+
+
+
+    <div class=fancy>
+    <div style="font-size:2em;text-align:center;color:#044a64">
+      The CSV Virtual Table
+    </div>
+    <div class=startsearch></div>
+  
+
+<h1 id="section_1">1. Overview</h1>
+
+<p>
+The CSV virtual table reads
+<a href="https://www.ietf.org/rfc/rfc4180.txt">RFC 4180</a> formatted comma-separated
+values, and returns that content as if it were rows and columns of an SQL
+table.
+</p>
+
+<p>
+The CSV virtual table is useful to applications that need to bulk-load
+large amounts of comma-separated value content.
+The CSV virtual table is also useful as a template source file for
+implementing other virtual tables.
+</p>
+
+
+<p>
+The CVS virtual table is not built into the SQLite amalgamation.
+It is available as a
+<a href="https://www.sqlite.org/src/artifact?ci=trunk&filename=ext/misc/csv.c">separate source file</a>
+that can be compiled into a <a href="loadext.html">loadable extension</a>.
+Typical usage of the CSV virtual table from the
+<a href="cli.html">command-line shell</a> would be something like this:
+
+<div class=codeblock style="margin:0 15ex"><table width=100% style="border:1px solid #80a796;padding:0 1ex;background-color:#EEEEEE"><tr><td><pre style="font-size:1.1em">.load ./csv
+CREATE VIRTUAL TABLE temp.t1 USING csv(filename='thefile.csv');
+SELECT * FROM t1;
+</pre></table></div>
+
+<p>
+The first line of the script above causes the <a href="cli.html">command-line shell</a> to
+read and activate the run-time loadable extension for CSV.  For an
+application, the equivalent C-language API is
+<a href="c3ref/load_extension.html">sqlite3_load_extension()</a>.
+Observe that the filename extension (ex: ".dll" or ".so" or ".dylib") is
+omitted from the extension filename.  Omitting the filename extension is
+not required, but it helps in making the script cross-platform.  SQLite
+will automatically append the appropriate extension.
+
+<p>
+The second line above creates a virtual table named "t1" that reads
+the content of the file named in the argument.  The number and names of
+the columns is determined automatically by reading the first line of
+content.  Other options to the CSV virtual table provide the ability to
+take the CSV content from a string rather than a separate file, and give 
+the programmer more control over the number and names of the columns.
+The options are detailed below.  The CSV virtual table is usually
+created as a TEMP table so that it exists only for the current database
+connection and does not become a permanent part of the database schema.
+Note that there is no "CREATE TEMP VIRTUAL TABLE" command in SQLite.
+Instead, prepend the "temp." schema prefix to the name of the virtual
+table.
+
+<p>
+The third line of the example shows the virtual table being used, to read
+all content of the CSV file.  This is perhaps the simplest possible use
+of the virtual table.  The CSV virtual table can be used anywhere an ordinary
+virtual table can be used.  One can use the CSV virtual table inside subqueries,
+or <a href="lang_with.html">common table expressions</a> or add WHERE, GROUP BY, HAVING, ORDER BY,
+and LIMIT clauses as required.
+
+<h1 id="section_2">2. Recognized Arguments</h1>
+
+<p>
+The example above showed a single <b>filename='th3file.csv'</b> argument
+for the CSV virtual table.  But other arguments are also possible.
+
+<ul>
+<li><p><b>filename=</b><i>FILENAME</i>
+<p>The <b>filename=</b> argument specifies an external file from which
+CSV content is read.  Every CSV virtual table must have either a 
+<b>filename=</b> argument or a <b>data=</b> argument and not both.
+
+<li><p><b>data=</b><i>TEXT</i>
+<p>The <b>data=</b> argument specifies that <i>TEXT</i> is the literal
+content of the CSV file.
+
+<li><p><b>schema=</b><i>SCHEMA</i>
+<p> The <b>schema=</b> argument specifies a <a href="lang_createtable.html">CREATE TABLE</a> statement that
+the CVS virtual table passes to the <a href="c3ref/declare_vtab.html">sqlite3_declare_vtab()</a> interface in
+order to define the number and names of the columns in the virtual table.
+If both the <b>schema=</b> and the <b>columns=</b> arguments are omitted,
+then the CVS virtual table reads the first row of the input content in order
+to determine the number of columns and names the columns <b>cNNN</b> where
+<b>NNN</b> values are consecutive integers.  It is not allowed to have
+both <b>scheam=</b> and <b>columns=</b> arguments.
+
+<li><p><b>columns=</b><i>N</i>
+<p>The <b>columns=</b><i>N</i> argument causes the virtual table to have
+exactly <i>N</i> columns.  If the input data contains more columns than this,
+then the excess columns are ignored.  If the input data contains fewer columns,
+then extra columns are filled with NULL.
+</u>
+

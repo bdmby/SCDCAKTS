@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>The dbhash.exe Utility Program</title>
+<style type="text/css">
+body {
+    margin: auto;
+    font-family: Verdana, sans-serif;
+    padding: 8px 1%;
+}
+
+a { color: #044a64 }
+a:visited { color: #734559 }
+
+.logo { position:absolute; margin:3px; }
+.tagline {
+  float:right;
+  text-align:right;
+  font-style:italic;
+  width:300px;
+  margin:12px;
+  margin-top:58px;
+}
+
+.menubar {
+  clear: both;
+  border-radius: 8px;
+  background: #044a64;
+  padding: 0px;
+  margin: 0px;
+  cell-spacing: 0px;
+}    
+.toolbar {
+  text-align: center;
+  line-height: 1.6em;
+  margin: 0;
+  padding: 0px 8px;
+}
+.toolbar a { color: white; text-decoration: none; padding: 6px 12px; }
+.toolbar a:visited { color: white; }
+.toolbar a:hover { color: #044a64; background: white; }
+
+.content    { margin: 5%; }
+.content dt { font-weight:bold; }
+.content dd { margin-bottom: 25px; margin-left:20%; }
+.content ul { padding:0px; padding-left: 15px; margin:0px; }
+
+/* Things for "fancyformat" documents start here. */
+.fancy img+p {font-style:italic}
+.fancy .codeblock i { color: darkblue; }
+.fancy h1,.fancy h2,.fancy h3,.fancy h4 {font-weight:normal;color:#044a64}
+.fancy h2 { margin-left: 10px }
+.fancy h3 { margin-left: 20px }
+.fancy h4 { margin-left: 30px }
+.fancy th {white-space:xnowrap;text-align:left;border-bottom:solid 1px #444}
+.fancy th, .fancy td {padding: 0.2em 1ex; vertical-align:top}
+.fancy #toc a        { color: darkblue ; text-decoration: none }
+.fancy .todo         { color: #AA3333 ; font-style : italic }
+.fancy .todo:before  { content: 'TODO:' }
+.fancy p.todo        { border: solid #AA3333 1px; padding: 1ex }
+.fancy img { display:block; }
+.fancy :link:hover, .fancy :visited:hover { background: wheat }
+.fancy p,.fancy ul,.fancy ol,.fancy dl { margin: 1em 5ex }
+.fancy li p { margin: 1em 0 }
+.fancy blockquote { margin-left : 10ex }
+/* End of "fancyformat" specific rules. */
+
+.yyterm {
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 11px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+</style>
+  
+</head>
+<body>
+<div><!-- container div to satisfy validator -->
+
+<a href="index.html">
+<img class="logo" src="images/sqlite370_banner.gif" alt="SQLite Logo"
+ border="0"></a>
+<div><!-- IE hack to prevent disappearing logo--></div>
+<div class="tagline">Small. Fast. Reliable.<br>Choose any three.</div>
+
+<table width=100% class="menubar"><tr>
+  <td width=100%>
+  <div class="toolbar">
+    <a href="about.html">About</a>
+    <a href="docs.html">Documentation</a>
+    <a href="download.html">Download</a>
+    <a href="copyright.html">License</a>
+    <a href="support.html">Support</a>
+    <a href="http://www.hwaci.com/sw/sqlite/prosupport.html">Purchase</a>
+  </div>
+<script>
+  gMsg = "Search SQLite Docs..."
+  function entersearch() {
+    var q = document.getElementById("q");
+    if( q.value == gMsg ) { q.value = "" }
+    q.style.color = "black"
+    q.style.fontStyle = "normal"
+  }
+  function leavesearch() {
+    var q = document.getElementById("q");
+    if( q.value == "" ) { 
+      q.value = gMsg
+      q.style.color = "#044a64"
+      q.style.fontStyle = "italic"
+    }
+  }
+  function hideorshow(btn,obj){
+    var x = document.getElementById(obj);
+    var b = document.getElementById(btn);
+    if( x.style.display!='none' ){
+      x.style.display = 'none';
+      b.innerHTML='show';
+    }else{
+      x.style.display = '';
+      b.innerHTML='hide';
+    }
+    return false;
+  }
+</script>
+<td>
+    <div style="padding:0 1em 0px 0;white-space:nowrap">
+    <form name=f method="GET" action="https://www.sqlite.org/search">
+      <input id=q name=q type=text
+       onfocus="entersearch()" onblur="leavesearch()" style="width:24ex;padding:1px 1ex; border:solid white 1px; font-size:0.9em ; font-style:italic;color:#044a64;" value="Search SQLite Docs...">
+      <input type=submit value="Go" style="border:solid white 1px;background-color:#044a64;color:white;font-size:0.9em;padding:0 1ex">
+    </form>
+    </div>
+  </table>
+
+<div class=startsearch></div>
+  
+
+
+
+    <div class=fancy>
+    <div style="font-size:2em;text-align:center;color:#044a64">
+      The dbhash.exe Utility Program
+    </div>
+    <div class=startsearch></div>
+  
+
+<h1 id="section_1">1. Overview</h1>
+
+<p>The <b>dbhash</b> (or <b>dbhash.exe</b> on Windows) utility is a
+command-line program that computes the SHA1 hash of the schema and content 
+for an SQLite database.
+
+<p>Dbhash ignores extraneous formatting details and hashes only the database
+schema and content.  Hence the hash is constant even if the database file
+is modified by:
+
+<ul>
+<li> <a href="lang_vacuum.html">VACUUM</a>
+<li> <a href="pragma.html#pragma_page_size">PRAGMA page_size</a>
+<li> <a href="pragma.html#pragma_journal_mode">PRAGMA journal_mode</a>
+<li> <a href="lang_reindex.html">REINDEX</a>
+<li> <a href="lang_analyze.html">ANALYZE</a>
+<li> copied via the <a href="backup.html">backup API</a>
+<li> ... and so forth
+</ul>
+
+<p>The operations above can potentially cause vast changes the raw database file,
+and hence cause very different SHA1 hashes at the file level.
+But since the content represented in the database file is unchanged by these
+operations, the hash computed by dbhash is also unchanged.
+
+<p>Dbhash can be used to compare two databases to confirm that they
+are equivalent, even though their representation on disk is quite different.
+Dbhash might also be used to verify the content of a remote database without having
+to transmit the entire content of the remote database over a slow link.
+
+<h1 id="section_2">2. Usage</h1>
+
+<p>Dbhash is a command-line utility.
+To run it, type "dbhash" on a command-line prompt followed by the names of
+one or more SQLite database files that are to be hashed.
+The database hashes will be displayed on standard output.
+For example:
+
+<div class=codeblock style="margin:0 15ex"><table width=100% style="border:1px solid #80a796;padding:0 1ex;background-color:#EEEEEE"><tr><td><pre style="font-size:1.1em">drh@bella:~/sqlite/bld$ dbhash ~/Fossils/sqlite.fossil
+8d3da9ff87196312aaa33076627ccb7943ef79e3 /home/drh/Fossils/sqlite.fossil
+</pre></table></div>
+
+<p>Dbhash supports command-line options that can restrict the tables of the
+database file that are hashed, or restrict the hash to only content or only
+the schema.  Run "dbhash --help" for further information.
+
+<h1 id="section_3">3. Building</h1>
+
+<p>To build a copy of the dbhash utility program on unix, get a copy of the
+canonical SQLite source code and enter:
+
+<div class=codeblock style="margin:0 15ex"><table width=100% style="border:1px solid #80a796;padding:0 1ex;background-color:#EEEEEE"><tr><td><pre style="font-size:1.1em">./configure
+make dbhash
+</pre></table></div>
+
+<p>On Windows, enter:
+
+<div class=codeblock style="margin:0 15ex"><table width=100% style="border:1px solid #80a796;padding:0 1ex;background-color:#EEEEEE"><tr><td><pre style="font-size:1.1em">nmake /f makefile.msc dbhash.exe
+</pre></table></div>
+
+<p>The dbhash program is implemented by a single file of C-code
+called <a href="https://www.sqlite.org/src/artifact?ci=trunk&filename=tool/dbhash.c">dbhash.c</a>.
+To build the dbhash program manually, simply compile the dbhash.c source file
+and link it against the SQLite library.
+
