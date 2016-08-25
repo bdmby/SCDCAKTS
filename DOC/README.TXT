@@ -1,0 +1,1 @@
+http://www.webdelphi.ru/2012/10/sqlite-v-delphi-xe3/#connection
