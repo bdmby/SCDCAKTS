@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{1B15BF52-518B-4C30-8A9D-0E99319C5ED0}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="SCDCAktsProject.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Components\EhLib\Demos\LookupCombo.LookupFilter\Project1.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SCDCAktsProject">
+        <MSBuild Projects="SCDCAktsProject.dproj"/>
+    </Target>
+    <Target Name="SCDCAktsProject:Clean">
+        <MSBuild Projects="SCDCAktsProject.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SCDCAktsProject:Make">
+        <MSBuild Projects="SCDCAktsProject.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Project1">
+        <MSBuild Projects="..\Components\EhLib\Demos\LookupCombo.LookupFilter\Project1.dproj"/>
+    </Target>
+    <Target Name="Project1:Clean">
+        <MSBuild Projects="..\Components\EhLib\Demos\LookupCombo.LookupFilter\Project1.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Project1:Make">
+        <MSBuild Projects="..\Components\EhLib\Demos\LookupCombo.LookupFilter\Project1.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SCDCAktsProject;Project1"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SCDCAktsProject:Clean;Project1:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SCDCAktsProject:Make;Project1:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
