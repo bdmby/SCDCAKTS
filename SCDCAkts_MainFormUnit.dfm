@@ -12,6 +12,7 @@ object SCDCAkts_MainForm: TSCDCAkts_MainForm
   Font.Style = []
   Menu = SCDCAktsMainMenu
   OldCreateOrder = False
+  OnActivate = FormActivate
   OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
@@ -31,9 +32,13 @@ object SCDCAkts_MainForm: TSCDCAkts_MainForm
         Caption = #1055#1088#1077#1076#1087#1088#1080#1103#1090#1080#1103
         OnClick = CustomerSettingMenuItemClick
       end
-      object SubjectsMenuItem: TMenuItem
-        Caption = #1047#1072#1082#1072#1079#1095#1080#1082#1080
-        OnClick = SubjectsMenuItemClick
+      object SubjectSettingMenuItem: TMenuItem
+        Caption = #1052#1086#1076#1091#1083#1080
+        OnClick = SubjectSettingMenuItemClick
+      end
+      object ClientSettingMenuItem: TMenuItem
+        Caption = #1050#1083#1080#1077#1085#1090#1099
+        OnClick = ClientSettingMenuItemClick
       end
     end
   end

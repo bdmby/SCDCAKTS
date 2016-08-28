@@ -16,7 +16,6 @@ type
     SCDCAkts_SubjectSettingFormStorage: TFormStorage;
     SubjectDBGridEh: TDBGridEh;
     SubjectDataSource: TDataSource;
-    SubjectsFDTable: TFDTable;
   private
     { Private declarations }
   public

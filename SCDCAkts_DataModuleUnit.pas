@@ -7,11 +7,15 @@ uses
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
   FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait, Data.DB,
-  FireDAC.Comp.Client;
+  FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
+  FireDAC.DApt, FireDAC.Comp.DataSet;
 
 type
-  TSCDCAktsDataModule = class(TDataModule)
+  TSCDCAkts_DataModule = class(TDataModule)
     SCDCAktsFDConnection: TFDConnection;
+    CustomersFDTable: TFDTable;
+    SubjectsFDTable: TFDTable;
+    ClientFDTable: TFDTable;
   private
     { Private declarations }
   public
@@ -19,7 +23,7 @@ type
   end;
 
 var
-  SCDCAktsDataModule: TSCDCAktsDataModule;
+  SCDCAkts_DataModule: TSCDCAkts_DataModule;
 
 implementation
 

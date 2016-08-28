@@ -1,4 +1,4 @@
-object CustomerSettingForm: TCustomerSettingForm
+object SCDCAkts_CustomerSettingForm: TSCDCAkts_CustomerSettingForm
   Left = 0
   Top = 0
   Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1087#1088#1077#1076#1087#1088#1080#1103#1090#1080#1081
@@ -25,7 +25,6 @@ object CustomerSettingForm: TCustomerSettingForm
     DataSource = CustomersDataSource
     DynProps = <>
     HorzScrollBar.ExtraPanel.Visible = True
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
     SearchPanel.Enabled = True
     SearchPanel.FilterOnTyping = True
     SearchPanel.Location = splHorzScrollBarExtraPanelEh
@@ -82,17 +81,8 @@ object CustomerSettingForm: TCustomerSettingForm
     Top = 64
   end
   object CustomersDataSource: TDataSource
-    DataSet = CustomersFDTable
-    Left = 248
-    Top = 152
-  end
-  object CustomersFDTable: TFDTable
-    Active = True
-    IndexFieldNames = 'customerid'
-    Connection = SCDCAktsDataModule.SCDCAktsFDConnection
-    UpdateOptions.UpdateTableName = 'customers'
-    TableName = 'customers'
-    Left = 104
-    Top = 152
+    DataSet = SCDCAktsDataModule.CustomersFDTable
+    Left = 128
+    Top = 128
   end
 end

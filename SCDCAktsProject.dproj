@@ -102,16 +102,20 @@
             <Form>SCDCAkts_MainForm</Form>
         </DCCReference>
         <DCCReference Include="SCDCAkts_CustomerSettingFormUnit.pas">
-            <Form>CustomerSettingForm</Form>
+            <Form>SCDCAkts_CustomerSettingForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="SCDCAkts_DataModuleUnit.pas">
-            <Form>SCDCAktsDataModule</Form>
+            <Form>SCDCAkts_DataModule</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="SCDCAkts_SubjectSettingFormUnit.pas">
             <Form>SCDCAkts_SubjectSettingForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="SCDCAkts_ClientSettingFormUnit.pas">
+            <Form>SCDCAkts_ClientSettingForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

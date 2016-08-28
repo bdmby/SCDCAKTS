@@ -12,11 +12,10 @@ uses
   FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
-  TCustomerSettingForm = class(TForm)
+  TSCDCAkts_CustomerSettingForm = class(TForm)
     CustomersDBGridEh: TDBGridEh;
     SCDCAkts_CustomerSettingFormStorage: TFormStorage;
     CustomersDataSource: TDataSource;
-    CustomersFDTable: TFDTable;
   private
     { Private declarations }
   public
@@ -24,7 +23,7 @@ type
   end;
 
 var
-  CustomerSettingForm: TCustomerSettingForm;
+  SCDCAkts_CustomerSettingForm: TSCDCAkts_CustomerSettingForm;
 
 implementation
 
