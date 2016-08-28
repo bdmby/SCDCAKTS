@@ -11,15 +11,22 @@ uses
   FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, DBGridEh, Vcl.StdCtrls, Vcl.Mask, DBCtrlsEh,
   DBLookupEh, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, EhLibVCL,
-  GridsEh, DBAxisGridsEh, DBVertGridsEh;
+  GridsEh, DBAxisGridsEh, DBVertGridsEh, Vcl.Menus, RxPlacemnt,
+  SCDCAkts_SubjectSettingFormUnit, SCDCAkts_CustomerSettingFormUnit;
 
 type
   TSCDCAkts_MainForm = class(TForm)
-    DBVertGridEh1: TDBVertGridEh;
-    FDConnection1: TFDConnection;
-    FDQuery1: TFDQuery;
-    DataSource1: TDataSource;
-    DBLookupComboboxEh1: TDBLookupComboboxEh;
+    SCDCAktsMainMenu: TMainMenu;
+    FileMenuItem: TMenuItem;
+    ExitProgramMenuItem: TMenuItem;
+    SettingsMenuItem: TMenuItem;
+    CustomerSettingMenuItem: TMenuItem;
+    SCDCAkts_MainFormStorage: TFormStorage;
+    SubjectsMenuItem: TMenuItem;
+    procedure ExitProgramMenuItemClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure CustomerSettingMenuItemClick(Sender: TObject);
+    procedure SubjectsMenuItemClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,5 +39,38 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TSCDCAkts_MainForm.CustomerSettingMenuItemClick(Sender: TObject);
+begin
+  if (not Assigned(CustomerSettingForm)) then begin
+    CustomerSettingForm := TCustomerSettingForm.Create(Self);
+  end;
+
+  CustomerSettingForm.ShowModal;
+
+  FreeAndNil(CustomerSettingForm);
+end;
+
+procedure TSCDCAkts_MainForm.ExitProgramMenuItemClick(Sender: TObject);
+begin
+  Self.Close;
+end;
+
+procedure TSCDCAkts_MainForm.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+procedure TSCDCAkts_MainForm.SubjectsMenuItemClick(Sender: TObject);
+begin
+  if (not Assigned(SCDCAkts_SubjectSettingForm)) then begin
+    SCDCAkts_SubjectSettingForm := TSCDCAkts_SubjectSettingForm.Create(Self);
+  end;
+
+  SCDCAkts_SubjectSettingForm.ShowModal;
+
+  FreeAndNil(SCDCAkts_SubjectSettingForm);
+end;
 
 end.

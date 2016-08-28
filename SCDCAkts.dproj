@@ -3,7 +3,7 @@
         <ProjectGuid>{B311B0A7-2DDF-4BC9-9375-765572F891FD}</ProjectGuid>
         <ProjectVersion>18.1</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
-        <MainSource>SCDCAkts.dpr</MainSource>
+        <MainSource>SCDCAktsProject.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -78,7 +78,7 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <DCC_UnitSearchPath>..\Components\EhLib\RADStudioXE10_1\Win32\Release;..\Components\Rx\Units;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>..\Components\EhLib\RADStudioXE10_1\Win32\Release;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <AppEnableHighDPI>true</AppEnableHighDPI>
@@ -101,19 +101,6 @@
         <DCCReference Include="SCDCAkts_MainFormUnit.pas">
             <Form>SCDCAkts_MainForm</Form>
         </DCCReference>
-        <DCCReference Include="SCDCAkts_CustomerSettingFormUnit.pas">
-            <Form>CustomerSettingForm</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="SCDCAkts_DataModuleUnit.pas">
-            <Form>SCDCAktsDataModule</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
-        <DCCReference Include="SCDCAkts_SubjectSettingFormUnit.pas">
-            <Form>SCDCAkts_SubjectSettingForm</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -132,7 +119,7 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">SCDCAkts.dpr</Source>
+                    <Source Name="MainSource">SCDCAktsProject.dpr</Source>
                 </Source>
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k240.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
@@ -140,7 +127,7 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Win32\Debug\SCDCAkts.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\SCDCAktsProject.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>SCDCAktsProject.exe</RemoteName>
                         <Overwrite>true</Overwrite>
