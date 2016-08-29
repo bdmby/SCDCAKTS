@@ -15,7 +15,7 @@ uses
   SCDCAkts_SubjectSettingFormUnit, SCDCAkts_CustomerSettingFormUnit,
   SCDCAkts_DataModuleUnit, SCDCAkts_ClientSettingFormUnit,
   SCDCAkts_PersonSettingFormUnit, DBGridEhGrouping, ToolCtrlsEh,
-  DBGridEhToolCtrls, DynVarsEh;
+  DBGridEhToolCtrls, DynVarsEh, System.ImageList, Vcl.ImgList, Vcl.Buttons;
 
 type
   TSCDCAkts_MainForm = class(TForm)
@@ -33,6 +33,8 @@ type
     SCDCAkts_Contract2SubjectDBGridEh: TDBGridEh;
     SCDCAkts_Contract2SubjectFDQuery: TFDQuery;
     SCDCAkts_Contract2SubjectFDQueryDataSource: TDataSource;
+    PeriodsBitBtn: TBitBtn;
+    SCDCAkts_MainFormImageList: TImageList;
     procedure ExitProgramMenuItemClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure CustomerSettingMenuItemClick(Sender: TObject);
@@ -101,6 +103,16 @@ end;
 procedure TSCDCAkts_MainForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+  if SCDCAkts_DataModule.SCDCAktsFDConnection.Connected then begin
+    SCDCAkts_DataModule.CustomersFDTable.Active := False;
+    SCDCAkts_DataModule.SubjectsFDTable.Active := False;
+    SCDCAkts_DataModule.ClientsFDTable.Active := False;
+    SCDCAkts_DataModule.PersonsFDTable.Active := False;
+    SCDCAkts_DataModule.PersonTypeRefsFDTable.Active := False;
+    SCDCAkts_DataModule.ContractsFDTable.Active := False;
+    SCDCAkts_DataModule.SCDCAktsFDConnection.Connected := False;
+  end;
+
   Action := caFree;
 end;
 
