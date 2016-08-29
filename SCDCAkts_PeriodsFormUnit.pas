@@ -9,7 +9,8 @@ uses
   RxPlacemnt, SCDCAkts_DataModuleUnit, Data.DB, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Buttons, frxClass, frxDBSet,
+  SCFRDigit;
 
 type
   TSCDCAkts_PeriodsForm = class(TForm)
@@ -20,9 +21,21 @@ type
     AssigneePersonFDQuery: TFDQuery;
     GetCustomerFDQuery: TFDQuery;
     PeriodsFDQuery: TFDQuery;
+    AktsDBGridEh: TDBGridEh;
+    AktsFDQuery: TFDQuery;
+    AktsFDQueryDataSource: TDataSource;
+    AktPrintBitBtn: TBitBtn;
+    frxAktDBDataset: TfrxDBDataset;
+    AktsReportFDQuery: TFDQuery;
+    frxAktReport: TfrxReport;
+    AktsPrintBitBtn: TBitBtn;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure PeriodsFDQueryNewRecord(DataSet: TDataSet);
+    procedure AktsFDQueryNewRecord(DataSet: TDataSet);
+    procedure SCDCAkts_PeriodDBGridEhRowDetailPanelShow(Sender: TCustomDBGridEh; var CanShow: Boolean);
+    procedure AktPrintBitBtnClick(Sender: TObject);
+    procedure AktsPrintBitBtnClick(Sender: TObject);
   private
     { Private declarations }
     FContractId : integer;
@@ -37,6 +50,43 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TSCDCAkts_PeriodsForm.AktsFDQueryNewRecord(DataSet: TDataSet);
+var
+  periodId: integer;
+begin
+  periodId := SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value;
+  AktsFDQuery.FindField('periodId').Value := periodId;
+end;
+
+procedure TSCDCAkts_PeriodsForm.AktsPrintBitBtnClick(Sender: TObject);
+begin
+  AktsReportFDQuery.Active := False;
+  AktsReportFDQuery.FindParam('AAKTID').Clear;
+  AktsReportFDQuery.Active := True;
+
+  frxAktReport.Clear;
+  frxAktReport.LoadFromFile({$IFDEF DEBUG}'..\..\'+{$ENDIF}'FRX\AKT.FR3');
+  frxAktReport.ShowReport(True);
+
+  AktsReportFDQuery.Active := False;
+end;
+
+procedure TSCDCAkts_PeriodsForm.AktPrintBitBtnClick(Sender: TObject);
+var
+  AktId: integer;
+begin
+  AktId := AktsDBGridEh.DataSource.DataSet.FindField('aktId').Value;
+  AktsReportFDQuery.Active := False;
+  AktsReportFDQuery.FindParam('AAKTID').Value := AktId;
+  AktsReportFDQuery.Active := True;
+
+  frxAktReport.Clear;
+  frxAktReport.LoadFromFile({$IFDEF DEBUG}'..\..\'+{$ENDIF}'FRX\AKT.FR3');
+  frxAktReport.ShowReport(True);
+
+  AktsReportFDQuery.Active := False;
+end;
 
 procedure TSCDCAkts_PeriodsForm.FormActivate(Sender: TObject);
 var
@@ -74,6 +124,16 @@ end;
 procedure TSCDCAkts_PeriodsForm.PeriodsFDQueryNewRecord(DataSet: TDataSet);
 begin
   PeriodsFDQuery.FindField('contractId').Value := contractId;
+end;
+
+procedure TSCDCAkts_PeriodsForm.SCDCAkts_PeriodDBGridEhRowDetailPanelShow(Sender: TCustomDBGridEh; var CanShow: Boolean);
+var
+  periodId: integer;
+begin
+  AktsFDQuery.Active := False;
+  periodId := SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value;
+  AktsFDQuery.FindParam('APERIODID').Value := periodId;
+  AktsFDQuery.Active := True;
 end;
 
 end.

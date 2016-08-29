@@ -1,7 +1,7 @@
 object SCDCAkts_DataModule: TSCDCAkts_DataModule
   OldCreateOrder = False
-  Height = 456
-  Width = 755
+  Height = 195
+  Width = 385
   object SCDCAktsFDConnection: TFDConnection
     Params.Strings = (
       'Database=DATABASE\SCDCAKTS.DB'
@@ -31,31 +31,31 @@ object SCDCAkts_DataModule: TSCDCAkts_DataModule
     Connection = SCDCAktsFDConnection
     UpdateOptions.UpdateTableName = 'clients'
     TableName = 'clients'
-    Left = 72
-    Top = 192
+    Left = 184
+    Top = 136
   end
   object PersonsFDTable: TFDTable
     IndexFieldNames = 'personId'
     Connection = SCDCAktsFDConnection
     UpdateOptions.UpdateTableName = 'persons'
     TableName = 'persons'
-    Left = 72
-    Top = 248
+    Left = 296
+    Top = 136
   end
   object PersonTypeRefsFDTable: TFDTable
     IndexFieldNames = 'personTypeId'
     Connection = SCDCAktsFDConnection
     UpdateOptions.UpdateTableName = 'persontyperefs'
     TableName = 'persontyperefs'
-    Left = 72
-    Top = 304
+    Left = 296
+    Top = 80
   end
   object ContractsFDTable: TFDTable
     IndexFieldNames = 'contractid'
     Connection = SCDCAktsFDConnection
     UpdateOptions.UpdateTableName = 'contracts'
     TableName = 'contracts'
-    Left = 208
+    Left = 184
     Top = 80
   end
 end
