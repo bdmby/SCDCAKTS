@@ -13,7 +13,8 @@ uses
   DBLookupEh, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, EhLibVCL,
   GridsEh, DBAxisGridsEh, DBVertGridsEh, Vcl.Menus, RxPlacemnt,
   SCDCAkts_SubjectSettingFormUnit, SCDCAkts_CustomerSettingFormUnit,
-  SCDCAkts_DataModuleUnit, SCDCAkts_ClientSettingFormUnit;
+  SCDCAkts_DataModuleUnit, SCDCAkts_ClientSettingFormUnit,
+  SCDCAkts_PersonSettingFormUnit;
 
 type
   TSCDCAkts_MainForm = class(TForm)
@@ -25,12 +26,14 @@ type
     SCDCAkts_MainFormStorage: TFormStorage;
     SubjectSettingMenuItem: TMenuItem;
     ClientSettingMenuItem: TMenuItem;
+    PersonSettingMenuItem: TMenuItem;
     procedure ExitProgramMenuItemClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure CustomerSettingMenuItemClick(Sender: TObject);
     procedure SubjectSettingMenuItemClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure ClientSettingMenuItemClick(Sender: TObject);
+    procedure PersonSettingMenuItemClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -79,7 +82,9 @@ begin
   if SCDCAkts_DataModule.SCDCAktsFDConnection.Connected then begin
     SCDCAkts_DataModule.CustomersFDTable.Active := True;
     SCDCAkts_DataModule.SubjectsFDTable.Active := True;
-    SCDCAkts_DataModule.ClientFDTable.Active := True;
+    SCDCAkts_DataModule.ClientsFDTable.Active := True;
+    SCDCAkts_DataModule.PersonsFDTable.Active := True;
+    SCDCAkts_DataModule.PersonTypeRefsFDTable.Active := True;
   end;
 end;
 
@@ -87,6 +92,17 @@ procedure TSCDCAkts_MainForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   Action := caFree;
+end;
+
+procedure TSCDCAkts_MainForm.PersonSettingMenuItemClick(Sender: TObject);
+begin
+  if (not Assigned(SCDCAkts_PersonSettingForm)) then begin
+    SCDCAkts_PersonSettingForm := TSCDCAkts_PersonSettingForm.Create(Self);
+  end;
+
+  SCDCAkts_PersonSettingForm.ShowModal;
+
+  FreeAndNil(SCDCAkts_PersonSettingForm);
 end;
 
 procedure TSCDCAkts_MainForm.SubjectSettingMenuItemClick(Sender: TObject);

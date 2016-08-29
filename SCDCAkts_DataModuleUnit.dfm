@@ -26,12 +26,28 @@ object SCDCAkts_DataModule: TSCDCAkts_DataModule
     Left = 72
     Top = 136
   end
-  object ClientFDTable: TFDTable
+  object ClientsFDTable: TFDTable
     IndexFieldNames = 'clientId'
     Connection = SCDCAktsFDConnection
     UpdateOptions.UpdateTableName = 'clients'
     TableName = 'clients'
     Left = 72
     Top = 192
+  end
+  object PersonsFDTable: TFDTable
+    IndexFieldNames = 'personId'
+    Connection = SCDCAktsFDConnection
+    UpdateOptions.UpdateTableName = 'persons'
+    TableName = 'persons'
+    Left = 72
+    Top = 248
+  end
+  object PersonTypeRefsFDTable: TFDTable
+    IndexFieldNames = 'personTypeId'
+    Connection = SCDCAktsFDConnection
+    UpdateOptions.UpdateTableName = 'persontyperefs'
+    TableName = 'persontyperefs'
+    Left = 72
+    Top = 304
   end
 end

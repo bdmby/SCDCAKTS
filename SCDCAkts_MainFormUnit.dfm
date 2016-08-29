@@ -40,6 +40,10 @@ object SCDCAkts_MainForm: TSCDCAkts_MainForm
         Caption = #1050#1083#1080#1077#1085#1090#1099
         OnClick = ClientSettingMenuItemClick
       end
+      object PersonSettingMenuItem: TMenuItem
+        Caption = #1048#1089#1087#1086#1083#1085#1080#1090#1077#1083#1077#1081
+        OnClick = PersonSettingMenuItemClick
+      end
     end
   end
   object SCDCAkts_MainFormStorage: TFormStorage

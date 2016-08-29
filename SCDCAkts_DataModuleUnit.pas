@@ -15,7 +15,9 @@ type
     SCDCAktsFDConnection: TFDConnection;
     CustomersFDTable: TFDTable;
     SubjectsFDTable: TFDTable;
-    ClientFDTable: TFDTable;
+    ClientsFDTable: TFDTable;
+    PersonsFDTable: TFDTable;
+    PersonTypeRefsFDTable: TFDTable;
   private
     { Private declarations }
   public
