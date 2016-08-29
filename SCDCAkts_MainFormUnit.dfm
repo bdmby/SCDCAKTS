@@ -2,8 +2,8 @@ object SCDCAkts_MainForm: TSCDCAkts_MainForm
   Left = 0
   Top = 0
   Caption = #1040#1082#1090#1099
-  ClientHeight = 451
-  ClientWidth = 826
+  ClientHeight = 565
+  ClientWidth = 914
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,23 +15,27 @@ object SCDCAkts_MainForm: TSCDCAkts_MainForm
   OnActivate = FormActivate
   OnClose = FormClose
   DesignSize = (
-    826
-    451)
+    914
+    565)
   PixelsPerInch = 96
   TextHeight = 13
   object SCDCAkts_ContractsDBGridEh: TDBGridEh
     Left = 8
     Top = 8
-    Width = 810
-    Height = 435
+    Width = 898
+    Height = 549
     Anchors = [akLeft, akTop, akRight, akBottom]
+    DataGrouping.Active = True
     DataSource = SCDCAkts_ContractsFDTableDataSource
     DynProps = <>
     HorzScrollBar.ExtraPanel.Visible = True
+    RowDetailPanel.Active = True
+    RowDetailPanel.Height = 200
     SearchPanel.Enabled = True
     SearchPanel.FilterOnTyping = True
     SearchPanel.Location = splHorzScrollBarExtraPanelEh
     TabOrder = 0
+    OnRowDetailPanelShow = SCDCAkts_ContractsDBGridEhRowDetailPanelShow
     Columns = <
       item
         DynProps = <>
@@ -81,14 +85,61 @@ object SCDCAkts_MainForm: TSCDCAkts_MainForm
         LookupParams.LookupDisplayFieldName = 'clientName'
         LookupParams.LookupKeyFieldNames = 'clientId'
         Title.Caption = #1047#1072#1082#1072#1079#1095#1080#1082
-        Width = 233
+        Width = 312
       end>
     object RowDetailData: TRowDetailPanelControlEh
+      object SCDCAkts_Contract2SubjectDBGridEh: TDBGridEh
+        Left = 8
+        Top = 8
+        Width = 817
+        Height = 177
+        DataSource = SCDCAkts_Contract2SubjectFDQueryDataSource
+        DynProps = <>
+        HorzScrollBar.ExtraPanel.Visible = True
+        ParentShowHint = False
+        SearchPanel.Enabled = True
+        SearchPanel.FilterOnTyping = True
+        SearchPanel.Location = splHorzScrollBarExtraPanelEh
+        ShowHint = False
+        TabOrder = 0
+        Columns = <
+          item
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'contract2subjectId'
+            Footers = <>
+            ReadOnly = True
+            Title.Caption = #1048#1076#1077#1085#1090#1080#1092#1080#1082#1072#1090#1086#1088
+            Width = 93
+          end
+          item
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'subjectId'
+            Footers = <>
+            LookupParams.KeyFieldNames = 'subjectId'
+            LookupParams.LookupDataSet = SCDCAkts_DataModule.SubjectsFDTable
+            LookupParams.LookupDisplayFieldName = 'subjectName'
+            LookupParams.LookupKeyFieldNames = 'subjectId'
+            Title.Caption = #1052#1086#1076#1091#1083#1100
+            Width = 465
+          end
+          item
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'contractId'
+            Footers = <>
+            ReadOnly = True
+            Visible = False
+          end>
+        object RowDetailData: TRowDetailPanelControlEh
+        end
+      end
     end
   end
   object SCDCAktsMainMenu: TMainMenu
-    Left = 48
-    Top = 24
+    Left = 56
+    Top = 464
     object FileMenuItem: TMenuItem
       Caption = #1060#1072#1081#1083
       object ExitProgramMenuItem: TMenuItem
@@ -119,12 +170,33 @@ object SCDCAkts_MainForm: TSCDCAkts_MainForm
   object SCDCAkts_MainFormStorage: TFormStorage
     UseRegistry = True
     StoredValues = <>
-    Left = 176
-    Top = 24
+    Left = 280
+    Top = 472
   end
   object SCDCAkts_ContractsFDTableDataSource: TDataSource
     DataSet = SCDCAkts_DataModule.ContractsFDTable
-    Left = 112
-    Top = 120
+    Left = 152
+    Top = 336
+  end
+  object SCDCAkts_Contract2SubjectFDQuery: TFDQuery
+    OnNewRecord = SCDCAkts_Contract2SubjectFDQueryNewRecord
+    Connection = SCDCAkts_DataModule.SCDCAktsFDConnection
+    SQL.Strings = (
+      'select c2s.contract2subjectId, c2s.contractid, c2s.subjectId'
+      '  from contract2subjects c2s'
+      '  where (c2s.contractId = :aContractId)')
+    Left = 582
+    Top = 123
+    ParamData = <
+      item
+        Name = 'ACONTRACTID'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object SCDCAkts_Contract2SubjectFDQueryDataSource: TDataSource
+    DataSet = SCDCAkts_Contract2SubjectFDQuery
+    Left = 334
+    Top = 123
   end
 end

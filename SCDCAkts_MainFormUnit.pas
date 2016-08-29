@@ -30,6 +30,9 @@ type
     PersonSettingMenuItem: TMenuItem;
     SCDCAkts_ContractsDBGridEh: TDBGridEh;
     SCDCAkts_ContractsFDTableDataSource: TDataSource;
+    SCDCAkts_Contract2SubjectDBGridEh: TDBGridEh;
+    SCDCAkts_Contract2SubjectFDQuery: TFDQuery;
+    SCDCAkts_Contract2SubjectFDQueryDataSource: TDataSource;
     procedure ExitProgramMenuItemClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure CustomerSettingMenuItemClick(Sender: TObject);
@@ -37,6 +40,9 @@ type
     procedure FormActivate(Sender: TObject);
     procedure ClientSettingMenuItemClick(Sender: TObject);
     procedure PersonSettingMenuItemClick(Sender: TObject);
+    procedure SCDCAkts_ContractsDBGridEhRowDetailPanelShow(
+      Sender: TCustomDBGridEh; var CanShow: Boolean);
+    procedure SCDCAkts_Contract2SubjectFDQueryNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -107,6 +113,23 @@ begin
   SCDCAkts_PersonSettingForm.ShowModal;
 
   FreeAndNil(SCDCAkts_PersonSettingForm);
+end;
+
+procedure TSCDCAkts_MainForm.SCDCAkts_Contract2SubjectFDQueryNewRecord(
+  DataSet: TDataSet);
+var
+  s : string;
+begin
+  s := SCDCAkts_ContractsDBGridEh.Columns[0].GetTextValue(True);
+  SCDCAkts_Contract2SubjectFDQuery.FindField('contractId').Value := s;
+end;
+
+procedure TSCDCAkts_MainForm.SCDCAkts_ContractsDBGridEhRowDetailPanelShow(
+  Sender: TCustomDBGridEh; var CanShow: Boolean);
+begin
+  SCDCAkts_Contract2SubjectFDQuery.Active := False;
+  SCDCAkts_Contract2SubjectFDQuery.Params.FindParam('ACONTRACTID').Value:= SCDCAkts_ContractsDBGridEh.Columns[0].GetTextValue(True);
+  SCDCAkts_Contract2SubjectFDQuery.Active := True;
 end;
 
 procedure TSCDCAkts_MainForm.SubjectSettingMenuItemClick(Sender: TObject);
