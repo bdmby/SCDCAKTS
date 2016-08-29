@@ -93,9 +93,4 @@ object SCDCAkts_PersonSettingForm: TSCDCAkts_PersonSettingForm
     Left = 128
     Top = 136
   end
-  object SCDCAkts_PersonTypeRefsDataSource: TDataSource
-    DataSet = SCDCAkts_DataModule.PersonTypeRefsFDTable
-    Left = 320
-    Top = 136
-  end
 end

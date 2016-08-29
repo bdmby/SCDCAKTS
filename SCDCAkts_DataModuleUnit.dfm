@@ -50,4 +50,12 @@ object SCDCAkts_DataModule: TSCDCAkts_DataModule
     Left = 72
     Top = 304
   end
+  object ContractsFDTable: TFDTable
+    IndexFieldNames = 'contractid'
+    Connection = SCDCAktsFDConnection
+    UpdateOptions.UpdateTableName = 'contracts'
+    TableName = 'contracts'
+    Left = 208
+    Top = 80
+  end
 end

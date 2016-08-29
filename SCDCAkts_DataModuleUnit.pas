@@ -18,6 +18,7 @@ type
     ClientsFDTable: TFDTable;
     PersonsFDTable: TFDTable;
     PersonTypeRefsFDTable: TFDTable;
+    ContractsFDTable: TFDTable;
   private
     { Private declarations }
   public

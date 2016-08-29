@@ -22,7 +22,7 @@ object SCDCAkts_SubjectSettingForm: TSCDCAkts_SubjectSettingForm
     Width = 770
     Height = 284
     Anchors = [akLeft, akTop, akRight, akBottom]
-    DataSource = SubjectDataSource
+    DataSource = SCDCAkts_SubjectsFDTableDataSource
     DynProps = <>
     HorzScrollBar.ExtraPanel.Visible = True
     SearchPanel.Enabled = True
@@ -55,8 +55,8 @@ object SCDCAkts_SubjectSettingForm: TSCDCAkts_SubjectSettingForm
     Left = 120
     Top = 80
   end
-  object SubjectDataSource: TDataSource
-    DataSet = SCDCAktsDataModule.SubjectsFDTable
+  object SCDCAkts_SubjectsFDTableDataSource: TDataSource
+    DataSet = SCDCAkts_DataModule.SubjectsFDTable
     Left = 192
     Top = 136
   end

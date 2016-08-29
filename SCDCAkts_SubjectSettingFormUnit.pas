@@ -15,7 +15,7 @@ type
   TSCDCAkts_SubjectSettingForm = class(TForm)
     SCDCAkts_SubjectSettingFormStorage: TFormStorage;
     SubjectDBGridEh: TDBGridEh;
-    SubjectDataSource: TDataSource;
+    SCDCAkts_SubjectsFDTableDataSource: TDataSource;
   private
     { Private declarations }
   public

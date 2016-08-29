@@ -81,7 +81,7 @@ object SCDCAkts_CustomerSettingForm: TSCDCAkts_CustomerSettingForm
     Top = 64
   end
   object CustomersDataSource: TDataSource
-    DataSet = SCDCAktsDataModule.CustomersFDTable
+    DataSet = SCDCAkts_DataModule.CustomersFDTable
     Left = 128
     Top = 128
   end

@@ -51,7 +51,7 @@ object SCDCAkts_ClientSettingForm: TSCDCAkts_ClientSettingForm
     end
   end
   object SCDSAkts_ClientSettingDataSource: TDataSource
-    DataSet = SCDCAktsDataModule.ClientFDTable
+    DataSet = SCDCAkts_DataModule.ClientsFDTable
     Left = 160
     Top = 152
   end

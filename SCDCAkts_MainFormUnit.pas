@@ -14,7 +14,8 @@ uses
   GridsEh, DBAxisGridsEh, DBVertGridsEh, Vcl.Menus, RxPlacemnt,
   SCDCAkts_SubjectSettingFormUnit, SCDCAkts_CustomerSettingFormUnit,
   SCDCAkts_DataModuleUnit, SCDCAkts_ClientSettingFormUnit,
-  SCDCAkts_PersonSettingFormUnit;
+  SCDCAkts_PersonSettingFormUnit, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh;
 
 type
   TSCDCAkts_MainForm = class(TForm)
@@ -27,6 +28,8 @@ type
     SubjectSettingMenuItem: TMenuItem;
     ClientSettingMenuItem: TMenuItem;
     PersonSettingMenuItem: TMenuItem;
+    SCDCAkts_ContractsDBGridEh: TDBGridEh;
+    SCDCAkts_ContractsFDTableDataSource: TDataSource;
     procedure ExitProgramMenuItemClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure CustomerSettingMenuItemClick(Sender: TObject);
@@ -85,6 +88,7 @@ begin
     SCDCAkts_DataModule.ClientsFDTable.Active := True;
     SCDCAkts_DataModule.PersonsFDTable.Active := True;
     SCDCAkts_DataModule.PersonTypeRefsFDTable.Active := True;
+    SCDCAkts_DataModule.ContractsFDTable.Active := True;
   end;
 end;
 

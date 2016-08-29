@@ -13,7 +13,6 @@ type
     SCDCAkts_PeronSettingFormStorage: TFormStorage;
     SCDCAkts_PersonSettingDBGridEh: TDBGridEh;
     SCDCAkts_PersonSettingDataSource: TDataSource;
-    SCDCAkts_PersonTypeRefsDataSource: TDataSource;
   private
     { Private declarations }
   public

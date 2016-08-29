@@ -16,7 +16,5 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TSCDCAkts_MainForm, SCDCAkts_MainForm);
   Application.CreateForm(TSCDCAkts_DataModule, SCDCAkts_DataModule);
-  Application.CreateForm(TSCDCAkts_ClientSettingForm, SCDCAkts_ClientSettingForm);
-  Application.CreateForm(TSCDCAkts_PersonSettingForm, SCDCAkts_PersonSettingForm);
   Application.Run;
 end.

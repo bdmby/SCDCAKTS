@@ -2,8 +2,8 @@ object SCDCAkts_MainForm: TSCDCAkts_MainForm
   Left = 0
   Top = 0
   Caption = #1040#1082#1090#1099
-  ClientHeight = 425
-  ClientWidth = 745
+  ClientHeight = 451
+  ClientWidth = 826
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,8 +14,78 @@ object SCDCAkts_MainForm: TSCDCAkts_MainForm
   OldCreateOrder = False
   OnActivate = FormActivate
   OnClose = FormClose
+  DesignSize = (
+    826
+    451)
   PixelsPerInch = 96
   TextHeight = 13
+  object SCDCAkts_ContractsDBGridEh: TDBGridEh
+    Left = 8
+    Top = 8
+    Width = 810
+    Height = 435
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    DataSource = SCDCAkts_ContractsFDTableDataSource
+    DynProps = <>
+    HorzScrollBar.ExtraPanel.Visible = True
+    SearchPanel.Enabled = True
+    SearchPanel.FilterOnTyping = True
+    SearchPanel.Location = splHorzScrollBarExtraPanelEh
+    TabOrder = 0
+    Columns = <
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'contractId'
+        Footers = <>
+        Title.Caption = #1048#1076#1077#1085#1090#1080#1092#1080#1082#1072#1090#1086#1088
+        Width = 100
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'contractNumber'
+        Footers = <>
+        Title.Caption = #1053#1086#1084#1077#1088' '#1076#1086#1075#1086#1074#1086#1088#1072
+        Width = 140
+      end
+      item
+        DynProps = <>
+        EditButtons = <
+          item
+          end>
+        FieldName = 'contractDate'
+        Footers = <>
+        Title.Caption = #1044#1072#1090#1072' '#1076#1086#1075#1086#1074#1086#1088#1072
+        Width = 112
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'customerId'
+        Footers = <>
+        LookupParams.KeyFieldNames = 'customerId'
+        LookupParams.LookupDataSet = SCDCAkts_DataModule.CustomersFDTable
+        LookupParams.LookupDisplayFieldName = 'customerName'
+        LookupParams.LookupKeyFieldNames = 'customerId'
+        Title.Caption = #1048#1089#1087#1086#1083#1085#1080#1090#1077#1083#1100
+        Width = 190
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'clientId'
+        Footers = <>
+        LookupParams.KeyFieldNames = 'clientId'
+        LookupParams.LookupDataSet = SCDCAkts_DataModule.ClientsFDTable
+        LookupParams.LookupDisplayFieldName = 'clientName'
+        LookupParams.LookupKeyFieldNames = 'clientId'
+        Title.Caption = #1047#1072#1082#1072#1079#1095#1080#1082
+        Width = 233
+      end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
+  end
   object SCDCAktsMainMenu: TMainMenu
     Left = 48
     Top = 24
@@ -37,7 +107,7 @@ object SCDCAkts_MainForm: TSCDCAkts_MainForm
         OnClick = SubjectSettingMenuItemClick
       end
       object ClientSettingMenuItem: TMenuItem
-        Caption = #1050#1083#1080#1077#1085#1090#1099
+        Caption = #1047#1072#1082#1072#1079#1095#1080#1082#1080
         OnClick = ClientSettingMenuItemClick
       end
       object PersonSettingMenuItem: TMenuItem
@@ -49,7 +119,12 @@ object SCDCAkts_MainForm: TSCDCAkts_MainForm
   object SCDCAkts_MainFormStorage: TFormStorage
     UseRegistry = True
     StoredValues = <>
-    Left = 80
-    Top = 88
+    Left = 176
+    Top = 24
+  end
+  object SCDCAkts_ContractsFDTableDataSource: TDataSource
+    DataSet = SCDCAkts_DataModule.ContractsFDTable
+    Left = 112
+    Top = 120
   end
 end
