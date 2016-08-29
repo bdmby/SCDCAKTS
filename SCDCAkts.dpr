@@ -7,7 +7,8 @@ uses
   SCDCAkts_DataModuleUnit in 'SCDCAkts_DataModuleUnit.pas' {SCDCAkts_DataModule: TDataModule},
   SCDCAkts_SubjectSettingFormUnit in 'SCDCAkts_SubjectSettingFormUnit.pas' {SCDCAkts_SubjectSettingForm},
   SCDCAkts_ClientSettingFormUnit in 'SCDCAkts_ClientSettingFormUnit.pas' {SCDCAkts_ClientSettingForm},
-  SCDCAkts_PersonSettingFormUnit in 'SCDCAkts_PersonSettingFormUnit.pas' {SCDCAkts_PersonSettingForm};
+  SCDCAkts_PersonSettingFormUnit in 'SCDCAkts_PersonSettingFormUnit.pas' {SCDCAkts_PersonSettingForm},
+  SCDCAkts_PeriodsFormUnit in 'SCDCAkts_PeriodsFormUnit.pas' {SCDCAkts_PeriodsForm};
 
 {$R *.res}
 

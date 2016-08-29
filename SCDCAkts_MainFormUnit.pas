@@ -15,7 +15,7 @@ uses
   SCDCAkts_SubjectSettingFormUnit, SCDCAkts_CustomerSettingFormUnit,
   SCDCAkts_DataModuleUnit, SCDCAkts_ClientSettingFormUnit,
   SCDCAkts_PersonSettingFormUnit, DBGridEhGrouping, ToolCtrlsEh,
-  DBGridEhToolCtrls, DynVarsEh, System.ImageList, Vcl.ImgList, Vcl.Buttons;
+  DBGridEhToolCtrls, DynVarsEh, System.ImageList, Vcl.ImgList, Vcl.Buttons, SCDCAkts_PeriodsFormUnit;
 
 type
   TSCDCAkts_MainForm = class(TForm)
@@ -45,6 +45,7 @@ type
     procedure SCDCAkts_ContractsDBGridEhRowDetailPanelShow(
       Sender: TCustomDBGridEh; var CanShow: Boolean);
     procedure SCDCAkts_Contract2SubjectFDQueryNewRecord(DataSet: TDataSet);
+    procedure PeriodsBitBtnClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -114,6 +115,18 @@ begin
   end;
 
   Action := caFree;
+end;
+
+procedure TSCDCAkts_MainForm.PeriodsBitBtnClick(Sender: TObject);
+begin
+  if (not Assigned(SCDCAkts_PeriodsForm)) then begin
+    SCDCAkts_PeriodsForm := TSCDCAkts_PeriodsForm.Create(Self);
+    SCDCAkts_PeriodsForm.ContractId := SCDCAkts_ContractsDBGridEh.DataSource.DataSet.FindField('contractId').Value;
+  end;
+
+  SCDCAkts_PeriodsForm.ShowModal;
+
+  FreeAndNil(SCDCAkts_PeriodsForm);
 end;
 
 procedure TSCDCAkts_MainForm.PersonSettingMenuItemClick(Sender: TObject);
