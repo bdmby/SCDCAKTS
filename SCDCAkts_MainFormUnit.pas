@@ -113,14 +113,16 @@ end;
 
 procedure TSCDCAkts_MainForm.PeriodsBitBtnClick(Sender: TObject);
 begin
-  if (not Assigned(SCDCAkts_PeriodsForm)) then begin
-    SCDCAkts_PeriodsForm := TSCDCAkts_PeriodsForm.Create(Self);
-    SCDCAkts_PeriodsForm.ContractId := SCDCAkts_ContractsDBGridEh.DataSource.DataSet.FindField('contractId').Value;
+  if (SCDCAkts_ContractsDBGridEh.DataSource.DataSet.FindField('contractId').Value <> null) then begin
+    if (not Assigned(SCDCAkts_PeriodsForm)) then begin
+      SCDCAkts_PeriodsForm := TSCDCAkts_PeriodsForm.Create(Self);
+      SCDCAkts_PeriodsForm.ContractId := SCDCAkts_ContractsDBGridEh.DataSource.DataSet.FindField('contractId').Value;
+    end;
+
+    SCDCAkts_PeriodsForm.ShowModal;
+
+    FreeAndNil(SCDCAkts_PeriodsForm);
   end;
-
-  SCDCAkts_PeriodsForm.ShowModal;
-
-  FreeAndNil(SCDCAkts_PeriodsForm);
 end;
 
 procedure TSCDCAkts_MainForm.PersonSettingMenuItemClick(Sender: TObject);

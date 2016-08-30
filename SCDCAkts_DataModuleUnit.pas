@@ -38,15 +38,13 @@ implementation
 procedure TSCDCAkts_DataModule.ContractsFDTableBeforeDelete(DataSet: TDataSet);
 var
   contractId: integer;
-  periodId: integer;
 begin
   contractId := DataSet.FindField('CONTRACTID').Value;
-  periodId := SCDCAktsFDConnection.ExecSQLScalar('select periodid from periods where (contractId = :aContractId)', [contractId]);
 
   // Удаление записей из contract2subjects
   SCDCAktsFDConnection.ExecSQL('delete from contract2subjects where (contractId = :aContractId)', [contractId]);
   // Удаление записей из akts
-  SCDCAktsFDConnection.ExecSQL('delete from akts where (periodId = :aPeriodId)', [periodId]);
+  SCDCAktsFDConnection.ExecSQL('delete from akts where (periodId in (select periodId from periods p where (p.contractId = :aContractId)))', [contractId]);
   // Удаление записей из periods
   SCDCAktsFDConnection.ExecSQL('delete from periods where (contractId = :aContractId)', [contractId]);
 end;
