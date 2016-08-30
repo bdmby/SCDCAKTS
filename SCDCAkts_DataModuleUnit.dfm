@@ -51,7 +51,8 @@ object SCDCAkts_DataModule: TSCDCAkts_DataModule
     Top = 80
   end
   object ContractsFDTable: TFDTable
-    IndexFieldNames = 'contractid'
+    BeforeDelete = ContractsFDTableBeforeDelete
+    IndexFieldNames = 'contractId'
     Connection = SCDCAktsFDConnection
     UpdateOptions.UpdateTableName = 'contracts'
     TableName = 'contracts'

@@ -19,140 +19,6 @@ object SCDCAkts_MainForm: TSCDCAkts_MainForm
     638)
   PixelsPerInch = 96
   TextHeight = 13
-  object SCDCAkts_ContractsDBGridEh: TDBGridEh
-    Left = 8
-    Top = 40
-    Width = 898
-    Height = 590
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    DataGrouping.Active = True
-    DataSource = SCDCAkts_ContractsFDTableDataSource
-    DynProps = <>
-    HorzScrollBar.ExtraPanel.Visible = True
-    RowDetailPanel.Active = True
-    RowDetailPanel.Height = 200
-    SearchPanel.Enabled = True
-    SearchPanel.FilterOnTyping = True
-    SearchPanel.Location = splHorzScrollBarExtraPanelEh
-    TabOrder = 0
-    OnRowDetailPanelShow = SCDCAkts_ContractsDBGridEhRowDetailPanelShow
-    Columns = <
-      item
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'contractId'
-        Footers = <>
-        Title.Caption = #1048#1076#1077#1085#1090#1080#1092#1080#1082#1072#1090#1086#1088
-        Width = 100
-      end
-      item
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'contractNumber'
-        Footers = <>
-        Title.Caption = #1053#1086#1084#1077#1088' '#1076#1086#1075#1086#1074#1086#1088#1072
-        Width = 140
-      end
-      item
-        DynProps = <>
-        EditButtons = <
-          item
-          end>
-        FieldName = 'contractDate'
-        Footers = <>
-        Title.Caption = #1044#1072#1090#1072' '#1076#1086#1075#1086#1074#1086#1088#1072
-        Width = 112
-      end
-      item
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'customerId'
-        Footers = <>
-        LookupParams.KeyFieldNames = 'customerId'
-        LookupParams.LookupDataSet = SCDCAkts_DataModule.CustomersFDTable
-        LookupParams.LookupDisplayFieldName = 'customerName'
-        LookupParams.LookupKeyFieldNames = 'customerId'
-        Title.Caption = #1048#1089#1087#1086#1083#1085#1080#1090#1077#1083#1100
-        Width = 190
-      end
-      item
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'clientId'
-        Footers = <>
-        LookupParams.KeyFieldNames = 'clientId'
-        LookupParams.LookupDataSet = SCDCAkts_DataModule.ClientsFDTable
-        LookupParams.LookupDisplayFieldName = 'clientName'
-        LookupParams.LookupKeyFieldNames = 'clientId'
-        Title.Caption = #1047#1072#1082#1072#1079#1095#1080#1082
-        Width = 312
-      end>
-    object RowDetailData: TRowDetailPanelControlEh
-      object SCDCAkts_Contract2SubjectDBGridEh: TDBGridEh
-        Left = 8
-        Top = 8
-        Width = 817
-        Height = 177
-        DataSource = SCDCAkts_Contract2SubjectFDQueryDataSource
-        DynProps = <>
-        HorzScrollBar.ExtraPanel.Visible = True
-        ParentShowHint = False
-        SearchPanel.Enabled = True
-        SearchPanel.FilterOnTyping = True
-        SearchPanel.Location = splHorzScrollBarExtraPanelEh
-        ShowHint = False
-        TabOrder = 0
-        Columns = <
-          item
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'contract2subjectId'
-            Footers = <>
-            ReadOnly = True
-            Title.Caption = #1048#1076#1077#1085#1090#1080#1092#1080#1082#1072#1090#1086#1088
-            Width = 93
-          end
-          item
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'subjectId'
-            Footers = <>
-            LookupParams.KeyFieldNames = 'subjectId'
-            LookupParams.LookupDataSet = SCDCAkts_DataModule.SubjectsFDTable
-            LookupParams.LookupDisplayFieldName = 'subjectName'
-            LookupParams.LookupKeyFieldNames = 'subjectId'
-            Title.Caption = #1052#1086#1076#1091#1083#1100
-            Width = 348
-          end
-          item
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'contractId'
-            Footers = <>
-            ReadOnly = True
-            Visible = False
-          end
-          item
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'dateBegin'
-            Footers = <>
-            Title.Caption = #1053#1072#1095#1072#1083#1086
-            Width = 96
-          end
-          item
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'dateEnd'
-            Footers = <>
-            Title.Caption = #1054#1082#1086#1085#1095#1072#1085#1080#1077
-            Width = 96
-          end>
-        object RowDetailData: TRowDetailPanelControlEh
-        end
-      end
-    end
-  end
   object PeriodsBitBtn: TBitBtn
     Left = 8
     Top = 9
@@ -186,8 +52,74 @@ object SCDCAkts_MainForm: TSCDCAkts_MainForm
       7ADDA170D698FFFBFFFEF9FC71D5997CDEA37CDEA371D79AE4F0E9FFFBFF7FD8
       A379DDA285DDA8F8FBF9FFFFFFFFFFFFFFFFFFFFFFFFF9F7F8FAF7F8FFFFFFFF
       FFFFFFFFFFFFFFFFFBFAFAF3F2F3FFFFFFFFFFFFFFFFFFFFFFFF}
-    TabOrder = 1
+    TabOrder = 0
     OnClick = PeriodsBitBtnClick
+  end
+  object SCDCAkts_ContractsDBGridEh: TDBGridEh
+    Left = 8
+    Top = 40
+    Width = 898
+    Height = 590
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    DataSource = ContractsDataSource
+    DynProps = <>
+    HorzScrollBar.ExtraPanel.Visible = True
+    SearchPanel.Enabled = True
+    SearchPanel.FilterOnTyping = True
+    SearchPanel.Location = splHorzScrollBarExtraPanelEh
+    TabOrder = 1
+    Columns = <
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'contractId'
+        Footers = <>
+        ReadOnly = True
+        Title.Caption = #1048#1076#1077#1085#1090#1080#1092#1080#1082#1072#1090#1086#1088
+        Width = 98
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'contractNumber'
+        Footers = <>
+        Title.Caption = #1053#1086#1084#1077#1088' '#1076#1086#1075#1086#1074#1086#1088#1072
+        Width = 129
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'contractDate'
+        Footers = <>
+        Title.Caption = #1044#1072#1090#1072' '#1076#1086#1075#1086#1074#1086#1088#1072
+        Width = 135
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'customerId'
+        Footers = <>
+        LookupParams.KeyFieldNames = 'customerId'
+        LookupParams.LookupDataSet = SCDCAkts_DataModule.CustomersFDTable
+        LookupParams.LookupDisplayFieldName = 'customerName'
+        LookupParams.LookupKeyFieldNames = 'customerId'
+        Title.Caption = #1048#1089#1087#1086#1083#1085#1080#1090#1077#1083#1100
+        Width = 189
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'clientId'
+        Footers = <>
+        LookupParams.KeyFieldNames = 'clientId'
+        LookupParams.LookupDataSet = SCDCAkts_DataModule.ClientsFDTable
+        LookupParams.LookupDisplayFieldName = 'clientName'
+        LookupParams.LookupKeyFieldNames = 'clientId'
+        Title.Caption = #1047#1072#1082#1072#1079#1095#1080#1082
+        Width = 235
+      end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object SCDCAktsMainMenu: TMainMenu
     Left = 56
@@ -225,39 +157,11 @@ object SCDCAkts_MainForm: TSCDCAkts_MainForm
     Left = 280
     Top = 472
   end
-  object SCDCAkts_ContractsFDTableDataSource: TDataSource
-    DataSet = SCDCAkts_DataModule.ContractsFDTable
-    Left = 152
-    Top = 336
-  end
-  object SCDCAkts_Contract2SubjectFDQuery: TFDQuery
-    OnNewRecord = SCDCAkts_Contract2SubjectFDQueryNewRecord
-    Connection = SCDCAkts_DataModule.SCDCAktsFDConnection
-    SQL.Strings = (
-      
-        'select c2s.contract2subjectId, c2s.contractid, c2s.subjectId, c2' +
-        's.dateBegin, c2s.dateEnd'
-      '  from contract2subjects c2s'
-      '  where (c2s.contractId = :aContractId)')
-    Left = 582
-    Top = 123
-    ParamData = <
-      item
-        Name = 'ACONTRACTID'
-        DataType = ftInteger
-        ParamType = ptInput
-      end>
-  end
-  object SCDCAkts_Contract2SubjectFDQueryDataSource: TDataSource
-    DataSet = SCDCAkts_Contract2SubjectFDQuery
-    Left = 334
-    Top = 123
-  end
   object SCDCAkts_MainFormImageList: TImageList
     Left = 352
     Top = 336
     Bitmap = {
-      494C0101010008001C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010101000800280010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -395,5 +299,10 @@ object SCDCAkts_MainForm: TSCDCAkts_MainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
+  end
+  object ContractsDataSource: TDataSource
+    DataSet = SCDCAkts_DataModule.ContractsFDTable
+    Left = 64
+    Top = 344
   end
 end
