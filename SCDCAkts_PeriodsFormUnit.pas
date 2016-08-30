@@ -10,7 +10,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Buttons, frxClass, frxDBSet,
-  SCFRDigit;
+  SCFRDigit, frxDesgn, frxRich, frxExportDOCX, frxExportPDF, frxExportRTF;
 
 type
   TSCDCAkts_PeriodsForm = class(TForm)
@@ -29,6 +29,10 @@ type
     AktsReportFDQuery: TFDQuery;
     AktsPrintBitBtn: TBitBtn;
     frxAktReport: TfrxReport;
+    frxDesigner1: TfrxDesigner;
+    ReportDesignBitBtn: TBitBtn;
+    frxPDFExport1: TfrxPDFExport;
+    frxRTFExport1: TfrxRTFExport;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure PeriodsFDQueryNewRecord(DataSet: TDataSet);
@@ -36,6 +40,7 @@ type
     procedure SCDCAkts_PeriodDBGridEhRowDetailPanelShow(Sender: TCustomDBGridEh; var CanShow: Boolean);
     procedure AktPrintBitBtnClick(Sender: TObject);
     procedure AktsPrintBitBtnClick(Sender: TObject);
+    procedure ReportDesignBitBtnClick(Sender: TObject);
   private
     { Private declarations }
     FContractId : integer;
@@ -70,6 +75,13 @@ begin
   frxAktReport.ShowReport(True);
 
   AktsReportFDQuery.Active := False;
+end;
+
+procedure TSCDCAkts_PeriodsForm.ReportDesignBitBtnClick(Sender: TObject);
+begin
+//  frxAktReport.Clear;
+//  frxAktReport.LoadFromFile({$IFDEF DEBUG}'..\..\'+{$ENDIF}'FRX\AKT.FR3');
+//  frxAktReport.DesignReport(True, True);
 end;
 
 procedure TSCDCAkts_PeriodsForm.AktPrintBitBtnClick(Sender: TObject);

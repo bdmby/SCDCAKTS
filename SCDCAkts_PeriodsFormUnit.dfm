@@ -194,6 +194,43 @@ object SCDCAkts_PeriodsForm: TSCDCAkts_PeriodsForm
         TabOrder = 1
         OnClick = AktPrintBitBtnClick
       end
+      object ReportDesignBitBtn: TBitBtn
+        Left = 832
+        Top = 9
+        Width = 91
+        Height = 25
+        Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          1800000000000003000000000000000000000000000000000000333333333333
+          3333993366CCC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+          C0C0C0C0C0C0C0C0C0C033333399BFFF6699FF6699FF005500C0C0C0C0C0C0C0
+          C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C04D80E5CCE5FF
+          99BFFF005500228822005500C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+          C0C0C0C0C0C0C0C0C0C06699FFCCE5FF116F11339933228822228822005500C0
+          C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0228822
+          66CC664DB34D339933228822228822005500C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+          C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C022882266CC664DB34D33993322882222
+          8822005500C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+          C0C0C022882266CC664DB34D339933228822228822005500C0C0C0C0C0C0C0C0
+          C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C022882266CC664DB34D33
+          9933228822228822005500C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+          C0C0C0C0C0C0C0C0C022882266CC664DB34D339933228822228822005500C0C0
+          C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C022882266
+          CC664DB34D339933228822228822005500C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+          C0C0C0C0C0C0C0C0C0C0C0C0C0C0C022882266CC664DB34D3399332288222288
+          22005500C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+          C0C022882266CC664DB34D339933228822228822666666C0C0C0C0C0C0C0C0C0
+          C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C022882266CC664DB34D3399
+          33888888BBBBBB666666C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+          C0C0C0C0C0C0C0C022882266CC66AAAAAACCCCCC8888883333CCC0C0C0C0C0C0
+          C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0999999DDDD
+          DDAAAAAA6666DD3333CCC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+          C0C0C0C0C0C0C0C0C0C0C0C0C0C09999996666FF6666FFC0C0C0}
+        TabOrder = 2
+        Visible = False
+        OnClick = ReportDesignBitBtnClick
+      end
     end
   end
   object AktsPrintBitBtn: TBitBtn
@@ -363,11 +400,71 @@ object SCDCAkts_PeriodsForm: TSCDCAkts_PeriodsForm
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42612.565224965280000000
-    ReportOptions.LastChange = 42612.565224965280000000
+    ReportOptions.CreateDate = 42611.915991250000000000
+    ReportOptions.LastChange = 42612.651131215300000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     Left = 94
     Top = 202
+  end
+  object frxDesigner1: TfrxDesigner
+    DefaultScriptLanguage = 'PascalScript'
+    DefaultFont.Charset = DEFAULT_CHARSET
+    DefaultFont.Color = clWindowText
+    DefaultFont.Height = -13
+    DefaultFont.Name = 'Arial'
+    DefaultFont.Style = []
+    DefaultLeftMargin = 10.000000000000000000
+    DefaultRightMargin = 10.000000000000000000
+    DefaultTopMargin = 10.000000000000000000
+    DefaultBottomMargin = 10.000000000000000000
+    DefaultPaperSize = 9
+    DefaultOrientation = poPortrait
+    GradientEnd = 11982554
+    GradientStart = clWindow
+    TemplatesExt = 'fr3'
+    Restrictions = []
+    RTLLanguage = False
+    MemoParentFont = False
+    Left = 374
+    Top = 202
+  end
+  object frxPDFExport1: TfrxPDFExport
+    UseFileCache = True
+    ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
+    PrintOptimized = False
+    Outline = False
+    Background = False
+    HTMLTags = True
+    Quality = 95
+    Transparency = False
+    Author = 'FastReport'
+    Subject = 'FastReport PDF export'
+    ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
+    HideToolbar = False
+    HideMenubar = False
+    HideWindowUI = False
+    FitWindow = False
+    CenterWindow = False
+    PrintScaling = False
+    PdfA = False
+    Left = 446
+    Top = 218
+  end
+  object frxRTFExport1: TfrxRTFExport
+    UseFileCache = True
+    ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
+    PictureType = gpPNG
+    Wysiwyg = True
+    Creator = 'FastReport'
+    SuppressPageHeadersFooters = False
+    HeaderFooterMode = hfText
+    AutoSize = False
+    Left = 526
+    Top = 226
   end
 end

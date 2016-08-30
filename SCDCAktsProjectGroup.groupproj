@@ -6,9 +6,6 @@
         <Projects Include="SCDCAktsProject.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\Components\SCFRPackage\SCFRPackage.dproj">
-            <Dependencies/>
-        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -26,23 +23,14 @@
     <Target Name="SCDCAktsProject:Make">
         <MSBuild Projects="SCDCAktsProject.dproj" Targets="Make"/>
     </Target>
-    <Target Name="SCFRPackage">
-        <MSBuild Projects="..\Components\SCFRPackage\SCFRPackage.dproj"/>
-    </Target>
-    <Target Name="SCFRPackage:Clean">
-        <MSBuild Projects="..\Components\SCFRPackage\SCFRPackage.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="SCFRPackage:Make">
-        <MSBuild Projects="..\Components\SCFRPackage\SCFRPackage.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Build">
-        <CallTarget Targets="SCDCAktsProject;SCFRPackage"/>
+        <CallTarget Targets="SCDCAktsProject"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="SCDCAktsProject:Clean;SCFRPackage:Clean"/>
+        <CallTarget Targets="SCDCAktsProject:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="SCDCAktsProject:Make;SCFRPackage:Make"/>
+        <CallTarget Targets="SCDCAktsProject:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
