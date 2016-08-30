@@ -29,10 +29,10 @@ type
     AktsReportFDQuery: TFDQuery;
     AktsPrintBitBtn: TBitBtn;
     frxAktReport: TfrxReport;
-    frxDesigner1: TfrxDesigner;
+    frxAktDesigner: TfrxDesigner;
     ReportDesignBitBtn: TBitBtn;
-    frxPDFExport1: TfrxPDFExport;
-    frxRTFExport1: TfrxRTFExport;
+    frxAktPDFExport: TfrxPDFExport;
+    frxAktRTFExport: TfrxRTFExport;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure PeriodsFDQueryNewRecord(DataSet: TDataSet);
@@ -79,9 +79,9 @@ end;
 
 procedure TSCDCAkts_PeriodsForm.ReportDesignBitBtnClick(Sender: TObject);
 begin
-//  frxAktReport.Clear;
-//  frxAktReport.LoadFromFile({$IFDEF DEBUG}'..\..\'+{$ENDIF}'FRX\AKT.FR3');
-//  frxAktReport.DesignReport(True, True);
+  frxAktReport.Clear;
+  frxAktReport.LoadFromFile({$IFDEF DEBUG}'..\..\'+{$ENDIF}'FRX\AKT.FR3');
+  frxAktReport.DesignReport(True);
 end;
 
 procedure TSCDCAkts_PeriodsForm.AktPrintBitBtnClick(Sender: TObject);

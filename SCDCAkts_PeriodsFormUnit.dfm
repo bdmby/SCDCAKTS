@@ -128,6 +128,22 @@ object SCDCAkts_PeriodsForm: TSCDCAkts_PeriodsForm
           item
             DynProps = <>
             EditButtons = <>
+            FieldName = 'aktNumber'
+            Footers = <>
+            Title.Caption = #1053#1086#1084#1077#1088' '#1072#1082#1090#1072
+            Width = 93
+          end
+          item
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'aktDate'
+            Footers = <>
+            Title.Caption = #1044#1072#1090#1072' '#1072#1082#1090#1072
+            Width = 91
+          end
+          item
+            DynProps = <>
+            EditButtons = <>
             FieldName = 'subjectId'
             Footers = <>
             LookupParams.KeyFieldNames = 'subjectId'
@@ -135,7 +151,7 @@ object SCDCAkts_PeriodsForm: TSCDCAkts_PeriodsForm
             LookupParams.LookupDisplayFieldName = 'subjectName'
             LookupParams.LookupKeyFieldNames = 'subjectId'
             Title.Caption = #1052#1086#1076#1091#1083#1100
-            Width = 276
+            Width = 334
           end
           item
             DisplayFormat = '#.00'
@@ -144,7 +160,7 @@ object SCDCAkts_PeriodsForm: TSCDCAkts_PeriodsForm
             FieldName = 'amount'
             Footers = <>
             Title.Caption = #1057#1090#1086#1080#1084#1086#1089#1090#1100' (BYN)'
-            Width = 145
+            Width = 110
           end
           item
             DisplayFormat = '#.00'
@@ -153,7 +169,7 @@ object SCDCAkts_PeriodsForm: TSCDCAkts_PeriodsForm
             FieldName = 'laboriousness'
             Footers = <>
             Title.Caption = #1058#1088#1091#1076#1086#1105#1084#1082#1086#1089#1090#1100' ('#1085#1086#1088#1084#1086'/'#1095#1072#1089#1099')'
-            Width = 230
+            Width = 148
           end>
         object RowDetailData: TRowDetailPanelControlEh
         end
@@ -195,9 +211,9 @@ object SCDCAkts_PeriodsForm: TSCDCAkts_PeriodsForm
         OnClick = AktPrintBitBtnClick
       end
       object ReportDesignBitBtn: TBitBtn
-        Left = 832
+        Left = 816
         Top = 9
-        Width = 91
+        Width = 107
         Height = 25
         Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072
         Glyph.Data = {
@@ -228,7 +244,6 @@ object SCDCAkts_PeriodsForm: TSCDCAkts_PeriodsForm
           DDAAAAAA6666DD3333CCC0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
           C0C0C0C0C0C0C0C0C0C0C0C0C0C09999996666FF6666FFC0C0C0}
         TabOrder = 2
-        Visible = False
         OnClick = ReportDesignBitBtnClick
       end
     end
@@ -407,7 +422,7 @@ object SCDCAkts_PeriodsForm: TSCDCAkts_PeriodsForm
     Left = 94
     Top = 202
   end
-  object frxDesigner1: TfrxDesigner
+  object frxAktDesigner: TfrxDesigner
     DefaultScriptLanguage = 'PascalScript'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -426,10 +441,10 @@ object SCDCAkts_PeriodsForm: TSCDCAkts_PeriodsForm
     Restrictions = []
     RTLLanguage = False
     MemoParentFont = False
-    Left = 374
-    Top = 202
+    Left = 94
+    Top = 370
   end
-  object frxPDFExport1: TfrxPDFExport
+  object frxAktPDFExport: TfrxPDFExport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
@@ -450,10 +465,10 @@ object SCDCAkts_PeriodsForm: TSCDCAkts_PeriodsForm
     CenterWindow = False
     PrintScaling = False
     PdfA = False
-    Left = 446
-    Top = 218
+    Left = 94
+    Top = 258
   end
-  object frxRTFExport1: TfrxRTFExport
+  object frxAktRTFExport: TfrxRTFExport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
@@ -464,7 +479,7 @@ object SCDCAkts_PeriodsForm: TSCDCAkts_PeriodsForm
     SuppressPageHeadersFooters = False
     HeaderFooterMode = hfText
     AutoSize = False
-    Left = 526
-    Top = 226
+    Left = 94
+    Top = 314
   end
 end
