@@ -27,8 +27,8 @@ type
     AktPrintBitBtn: TBitBtn;
     frxAktDBDataset: TfrxDBDataset;
     AktsReportFDQuery: TFDQuery;
-    frxAktReport: TfrxReport;
     AktsPrintBitBtn: TBitBtn;
+    frxAktReport: TfrxReport;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure PeriodsFDQueryNewRecord(DataSet: TDataSet);

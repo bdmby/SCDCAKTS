@@ -363,11 +363,11 @@ object SCDCAkts_PeriodsForm: TSCDCAkts_PeriodsForm
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42611.915991250000000000
-    ReportOptions.LastChange = 42611.943119178200000000
+    ReportOptions.CreateDate = 42612.565224965280000000
+    ReportOptions.LastChange = 42612.565224965280000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     Left = 94
-    Top = 203
+    Top = 202
   end
 end
