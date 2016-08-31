@@ -10,7 +10,8 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Buttons, frxClass, frxDBSet,
-  SCFRDigit, frxDesgn, frxRich, frxExportDOCX, frxExportPDF, frxExportRTF, SCDCAkts_CopyAktsFormUnit;
+  SCFRDigit, frxDesgn, frxRich, frxExportDOCX, frxExportPDF, frxExportRTF, SCDCAkts_CopyAktsFormUnit,
+  SCDCAkts_RecalcFormUnit;
 
 type
   TSCDCAkts_PeriodsForm = class(TForm)
@@ -34,6 +35,7 @@ type
     frxAktPDFExport: TfrxPDFExport;
     frxAktRTFExport: TfrxRTFExport;
     CopyAktsBitBtn: TBitBtn;
+    RecalcBitBtn: TBitBtn;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure PeriodsFDQueryNewRecord(DataSet: TDataSet);
@@ -44,6 +46,7 @@ type
     procedure ReportDesignBitBtnClick(Sender: TObject);
     procedure CopyAktsBitBtnClick(Sender: TObject);
     procedure PeriodsFDQueryBeforeDelete(DataSet: TDataSet);
+    procedure RecalcBitBtnClick(Sender: TObject);
   private
     { Private declarations }
     FContractId : integer;
@@ -134,7 +137,36 @@ begin
         '  where (a.periodId = :aOldPeriodId)', [newPeriodId, oldPeriodId]);
       AktsFDQuery.Active := True;
       Refresh;
+      MessageBox(Self.Handle, 'Копирование актов выполнено', 'Сообщение', MB_OK + MB_ICONINFORMATION);
     end;
+  end;
+end;
+
+procedure TSCDCAkts_PeriodsForm.RecalcBitBtnClick(Sender: TObject);
+var
+  newPrice: double;
+  periodId: integer;
+begin
+  if (SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value <> null) then begin
+    if (not Assigned(SCDCAkts_RecalcForm)) then begin
+      SCDCAkts_RecalcForm := TSCDCAkts_RecalcForm.Create(Self);
+    end;
+
+    SCDCAkts_RecalcForm.ShowModal;
+    if (SCDCAkts_RecalcForm.ModalResult = mrOk) then begin
+      newPrice := SCDCAkts_RecalcForm.NewPriceCurrencyEdit.Value;
+      periodId := SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value;
+      AktsFDQuery.Active := False;
+      SCDCAkts_DataModuleUnit.SCDCAkts_DataModule.SCDCAktsFDConnection.ExecSQL(
+        'update akts' + #13#10 +
+        '  set amount = round(laboriousness * :aNewPrice, 2)' + #13#10 +
+        '  where akts.periodId = :aPeriodId', [newPrice, periodId]);
+      AktsFDQuery.Active := True;
+      Refresh;
+      MessageBox(Self.Handle, 'Пересчёт сумм актов выполнен', 'Сообщение', MB_OK + MB_ICONINFORMATION);
+    end;
+
+    FreeAndNil(SCDCAkts_RecalcForm);
   end;
 end;
 
