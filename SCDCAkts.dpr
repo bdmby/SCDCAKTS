@@ -10,7 +10,10 @@ uses
   SCDCAkts_PersonSettingFormUnit in 'SCDCAkts_PersonSettingFormUnit.pas' {SCDCAkts_PersonSettingForm},
   SCDCAkts_PeriodsFormUnit in 'SCDCAkts_PeriodsFormUnit.pas' {SCDCAkts_PeriodsForm},
   SCDCAkts_CopyAktsFormUnit in 'SCDCAkts_CopyAktsFormUnit.pas' {SCDCAkts_CopyAktsForm},
-  SCDCAkts_RecalcFormUnit in 'SCDCAkts_RecalcFormUnit.pas' {SCDCAkts_RecalcForm};
+  SCDCAkts_RecalcFormUnit in 'SCDCAkts_RecalcFormUnit.pas' {SCDCAkts_RecalcForm},
+  SCDCAkts_ReplaceAktDateFormUnit in 'SCDCAkts_ReplaceAktDateFormUnit.pas' {SCDCAkts_ReplaceAktDateForm},
+  Vcl.Themes,
+  Vcl.Styles;
 
 {$R *.res}
 

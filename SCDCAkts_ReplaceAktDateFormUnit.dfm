@@ -1,9 +1,9 @@
-object SCDCAkts_RecalcForm: TSCDCAkts_RecalcForm
+object SCDCAkts_ReplaceAktDateForm: TSCDCAkts_ReplaceAktDateForm
   Left = 0
   Top = 0
-  Caption = #1055#1077#1088#1077#1089#1095#1105#1090' '#1089#1091#1084#1084' '#1072#1082#1090#1086#1074
-  ClientHeight = 151
-  ClientWidth = 337
+  Caption = #1047#1072#1084#1077#1085#1072' '#1076#1072#1090#1099' '#1072#1082#1090#1086#1074
+  ClientHeight = 115
+  ClientWidth = 331
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,16 +12,16 @@ object SCDCAkts_RecalcForm: TSCDCAkts_RecalcForm
   Font.Style = []
   OldCreateOrder = False
   DesignSize = (
-    337
-    151)
+    331
+    115)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 8
+    Left = 16
     Top = 16
-    Width = 157
+    Width = 161
     Height = 19
-    Caption = #1057#1090#1086#1080#1084#1086#1089#1090#1100' '#1085#1086#1088#1084#1086' '#1095#1072#1089#1072':'
+    Caption = #1047#1072#1084#1077#1085#1080#1090#1100' '#1076#1072#1090#1091' '#1072#1082#1090#1086#1074' '#1085#1072':'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -29,24 +29,30 @@ object SCDCAkts_RecalcForm: TSCDCAkts_RecalcForm
     Font.Style = []
     ParentFont = False
   end
-  object NewPriceCurrencyEdit: TCurrencyEdit
-    Left = 191
+  object NewAktDateEdit: TDateEdit
+    Left = 192
     Top = 17
-    Width = 138
+    Width = 121
     Height = 21
-    DisplayFormat = ',0.00;-,0.00'
+    MinDate = 36526.000000000000000000
+    MaxDate = 73050.000000000000000000
+    CheckOnExit = True
+    DefaultToday = True
     Anchors = [akLeft, akTop, akRight]
+    NumGlyphs = 2
+    CalendarStyle = csDialog
+    Weekends = [Sun, Sat]
+    YearDigits = dyFour
     TabOrder = 0
-    OnChange = NewPriceCurrencyEditChange
+    Text = '31/08/2016'
   end
   object OkBitBtn: TBitBtn
-    Left = 40
-    Top = 96
+    Left = 32
+    Top = 72
     Width = 113
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
-    Enabled = False
     Glyph.Data = {
       36030000424D3603000000000000360000002800000010000000100000000100
       1800000000000003000000000000000000000000000000000000FFFFFFFFFFFF
@@ -78,8 +84,8 @@ object SCDCAkts_RecalcForm: TSCDCAkts_RecalcForm
     TabOrder = 1
   end
   object CancelBitBtn: TBitBtn
-    Left = 191
-    Top = 96
+    Left = 184
+    Top = 72
     Width = 113
     Height = 25
     Anchors = [akRight, akBottom]
@@ -114,10 +120,10 @@ object SCDCAkts_RecalcForm: TSCDCAkts_RecalcForm
     ModalResult = 2
     TabOrder = 2
   end
-  object SCDCAkts_RecalcFormStorage: TFormStorage
+  object SCDCAkts_ReplaceAktDateFormStorage: TFormStorage
     UseRegistry = True
     StoredValues = <>
-    Left = 80
-    Top = 48
+    Left = 120
+    Top = 16
   end
 end

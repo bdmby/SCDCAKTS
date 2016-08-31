@@ -11,7 +11,7 @@ uses
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Buttons, frxClass, frxDBSet,
   SCFRDigit, frxDesgn, frxRich, frxExportDOCX, frxExportPDF, frxExportRTF, SCDCAkts_CopyAktsFormUnit,
-  SCDCAkts_RecalcFormUnit;
+  SCDCAkts_RecalcFormUnit, SCDCAkts_ReplaceAktDateFormUnit;
 
 type
   TSCDCAkts_PeriodsForm = class(TForm)
@@ -36,6 +36,7 @@ type
     frxAktRTFExport: TfrxRTFExport;
     CopyAktsBitBtn: TBitBtn;
     RecalcBitBtn: TBitBtn;
+    ReplaceAktDateBitBtn: TBitBtn;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure PeriodsFDQueryNewRecord(DataSet: TDataSet);
@@ -47,6 +48,7 @@ type
     procedure CopyAktsBitBtnClick(Sender: TObject);
     procedure PeriodsFDQueryBeforeDelete(DataSet: TDataSet);
     procedure RecalcBitBtnClick(Sender: TObject);
+    procedure ReplaceAktDateBitBtnClick(Sender: TObject);
   private
     { Private declarations }
     FContractId : integer;
@@ -90,12 +92,13 @@ var
   periodId: integer;
 begin
   if (SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value <> null) then begin
+    periodId := SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value;
     AktsReportFDQuery.Active := False;
     AktsReportFDQuery.FindParam('AAKTID').Clear;
+    AktsReportFDQuery.FindParam('APERIODID').Value := periodId;
     AktsReportFDQuery.Active := True;
 
     frxAktReport.Clear;
-    periodId := SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value;
     frxAktReport.LoadFromFile(GetAktFileName(periodId));
     frxAktReport.ShowReport(True);
 
@@ -170,6 +173,39 @@ begin
   end;
 end;
 
+procedure TSCDCAkts_PeriodsForm.ReplaceAktDateBitBtnClick(Sender: TObject);
+var
+  periodId: integer;
+  newAktDate: string;
+  FS : TFormatSettings;
+begin
+  if (SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value <> null) then begin
+    if (not Assigned(SCDCAkts_ReplaceAktDateForm)) then begin
+      SCDCAkts_ReplaceAktDateForm := TSCDCAkts_ReplaceAktDateForm.Create(Self);
+    end;
+
+    SCDCAkts_ReplaceAktDateForm.ShowModal;
+
+    if (SCDCAkts_ReplaceAktDateForm.ModalResult = mrOk) then begin
+      periodId := SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value;
+
+      FS := TFormatSettings.Create;
+      FS.ShortDateFormat := 'dd/mm/yyyy';
+      newAktDate := DateToStr(SCDCAkts_ReplaceAktDateForm.NewAktDateEdit.Date, FS);
+      AktsFDQuery.Active := False;
+      SCDCAkts_DataModuleUnit.SCDCAkts_DataModule.SCDCAktsFDConnection.ExecSQL(
+        'update akts' + #13#10 +
+        '  set aktDate = to_date(:aNewAktDate, ''dd/mm/yyyy'')' + #13#10 +
+        '  where akts.periodId = :aPeriodId', [newAktDate, periodId]);
+      AktsFDQuery.Active := True;
+      Refresh;
+      MessageBox(Self.Handle, 'Замена даты в актах выполнена', 'Сообщение', MB_OK + MB_ICONINFORMATION);
+    end;
+
+    FreeAndnil(SCDCAkts_ReplaceAktDateForm);
+  end;
+end;
+
 procedure TSCDCAkts_PeriodsForm.ReportDesignBitBtnClick(Sender: TObject);
 var
   periodId: integer;
@@ -188,13 +224,14 @@ var
   periodId: integer;
 begin
   if (AktsDBGridEh.DataSource.DataSet.FindField('aktId').Value <> null) then begin
-    AktId := AktsDBGridEh.DataSource.DataSet.FindField('aktId').Value;
+    periodId := SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value;
+    aktId := AktsDBGridEh.DataSource.DataSet.FindField('aktId').Value;
     AktsReportFDQuery.Active := False;
-    AktsReportFDQuery.FindParam('AAKTID').Value := AktId;
+    AktsReportFDQuery.FindParam('AAKTID').Value := aktId;
+    AktsReportFDQuery.FindParam('APERIODID').Value := periodId;
     AktsReportFDQuery.Active := True;
 
     frxAktReport.Clear;
-    periodId := SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value;
     frxAktReport.LoadFromFile(GetAktFileName(periodId));
     frxAktReport.ShowReport(True);
 

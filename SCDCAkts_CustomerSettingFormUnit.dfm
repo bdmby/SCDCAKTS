@@ -3,7 +3,7 @@ object SCDCAkts_CustomerSettingForm: TSCDCAkts_CustomerSettingForm
   Top = 0
   Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1087#1088#1077#1076#1087#1088#1080#1103#1090#1080#1081
   ClientHeight = 305
-  ClientWidth = 767
+  ClientWidth = 936
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,14 +12,14 @@ object SCDCAkts_CustomerSettingForm: TSCDCAkts_CustomerSettingForm
   Font.Style = []
   OldCreateOrder = False
   DesignSize = (
-    767
+    936
     305)
   PixelsPerInch = 96
   TextHeight = 13
   object CustomersDBGridEh: TDBGridEh
     Left = 8
     Top = 8
-    Width = 751
+    Width = 920
     Height = 289
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = CustomersDataSource
@@ -70,6 +70,14 @@ object SCDCAkts_CustomerSettingForm: TSCDCAkts_CustomerSettingForm
         Footers = <>
         Title.Caption = #1041#1072#1085#1082
         Width = 283
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'customerAktFileName'
+        Footers = <>
+        Title.Caption = #1064#1072#1073#1083#1086#1085' '#1072#1082#1090#1072
+        Width = 128
       end>
     object RowDetailData: TRowDetailPanelControlEh
     end
