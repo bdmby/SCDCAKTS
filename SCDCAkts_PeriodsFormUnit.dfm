@@ -428,7 +428,7 @@ object SCDCAkts_PeriodsForm: TSCDCAkts_PeriodsForm
       '  inner join periods p on (p.periodId = a.periodId)'
       '  inner join subjects s on (s.subjectId = a.subjectId)'
       '  inner join contracts c on (c.contractId = p.contractId)'
-      '  inner join customers ct on (ct.customerId = c.contractId)'
+      '  inner join customers ct on (ct.customerId = c.customerId)'
       '  inner join clients cl on (cl.clientId = c.clientId)'
       '  inner join persons dp on (dp.personId = p.directorId)'
       '  inner join persons ap on (ap.personId = p.assigneeId)'

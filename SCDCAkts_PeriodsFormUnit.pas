@@ -47,6 +47,8 @@ type
   private
     { Private declarations }
     FContractId : integer;
+
+    function GetAktFileName(aPeriodId : integer): string;
   public
     { Public declarations }
     property ContractId: integer read FContractId write FContractId;
@@ -67,17 +69,35 @@ begin
   AktsFDQuery.FindField('periodId').Value := periodId;
 end;
 
-procedure TSCDCAkts_PeriodsForm.AktsPrintBitBtnClick(Sender: TObject);
+function TSCDCAkts_periodsForm.GetAktFileName(aPeriodId: Integer): string;
 begin
-  AktsReportFDQuery.Active := False;
-  AktsReportFDQuery.FindParam('AAKTID').Clear;
-  AktsReportFDQuery.Active := True;
+  // Получение имени шаблона акта
+  Result:= SCDCAkts_DataModuleUnit.SCDCAkts_DataModule.SCDCAktsFDConnection.ExecSQLScalar(
+    'select nvl(c.customerAktFileName, ''AKT.FR3'') as customerAktFileName' + #13#10 +
+    '  from periods p' + #13#10 +
+    '  inner join contracts cnt on (cnt.contractId = p.contractId)' + #13#10 +
+    '  inner join customers c on (c.customerId = cnt.customerId)' + #13#10 +
+    '  where (p.periodId = :aPeriodId)', [aPeriodId]);
+  // Корректировка имени для сборки
+  Result := UpperCase({$IFDEF DEBUG}'..\..\'+{$ENDIF}'FRX\' + Result);
+end;
 
-  frxAktReport.Clear;
-  frxAktReport.LoadFromFile({$IFDEF DEBUG}'..\..\'+{$ENDIF}'FRX\AKT.FR3');
-  frxAktReport.ShowReport(True);
+procedure TSCDCAkts_PeriodsForm.AktsPrintBitBtnClick(Sender: TObject);
+var
+  periodId: integer;
+begin
+  if (SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value <> null) then begin
+    AktsReportFDQuery.Active := False;
+    AktsReportFDQuery.FindParam('AAKTID').Clear;
+    AktsReportFDQuery.Active := True;
 
-  AktsReportFDQuery.Active := False;
+    frxAktReport.Clear;
+    periodId := SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value;
+    frxAktReport.LoadFromFile(GetAktFileName(periodId));
+    frxAktReport.ShowReport(True);
+
+    AktsReportFDQuery.Active := False;
+  end;
 end;
 
 procedure TSCDCAkts_PeriodsForm.CopyAktsBitBtnClick(Sender: TObject);
@@ -119,15 +139,21 @@ begin
 end;
 
 procedure TSCDCAkts_PeriodsForm.ReportDesignBitBtnClick(Sender: TObject);
+var
+  periodId: integer;
 begin
-  frxAktReport.Clear;
-  frxAktReport.LoadFromFile({$IFDEF DEBUG}'..\..\'+{$ENDIF}'FRX\AKT.FR3');
-  frxAktReport.DesignReport(True);
+  if (SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value <> null) then begin
+    frxAktReport.Clear;
+    periodId := SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value;
+    frxAktReport.LoadFromFile(GetAktFileName(periodId));
+    frxAktReport.DesignReport(True);
+  end;
 end;
 
 procedure TSCDCAkts_PeriodsForm.AktPrintBitBtnClick(Sender: TObject);
 var
-  AktId: integer;
+  aktId: integer;
+  periodId: integer;
 begin
   if (AktsDBGridEh.DataSource.DataSet.FindField('aktId').Value <> null) then begin
     AktId := AktsDBGridEh.DataSource.DataSet.FindField('aktId').Value;
@@ -136,7 +162,8 @@ begin
     AktsReportFDQuery.Active := True;
 
     frxAktReport.Clear;
-    frxAktReport.LoadFromFile({$IFDEF DEBUG}'..\..\'+{$ENDIF}'FRX\AKT.FR3');
+    periodId := SCDCAkts_PeriodDBGridEh.DataSource.DataSet.FindField('periodId').Value;
+    frxAktReport.LoadFromFile(GetAktFileName(periodId));
     frxAktReport.ShowReport(True);
 
     AktsReportFDQuery.Active := False;
